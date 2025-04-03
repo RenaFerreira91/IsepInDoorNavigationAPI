@@ -1,0 +1,6 @@
+@InDoorMappingAPI_HostAddress = http://localhost:5058
+
+GET {{InDoorMappingAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
