@@ -71,7 +71,7 @@ namespace InDoorMappingAPI
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
         };
     });
-
+            builder.WebHost.UseUrls("http://0.0.0.0:8080");
 
             var app = builder.Build();
 
