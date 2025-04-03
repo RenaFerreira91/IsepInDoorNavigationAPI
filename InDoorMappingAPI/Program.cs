@@ -95,9 +95,11 @@ namespace InDoorMappingAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Isep API", Version = "v1" });
 
-                // 🔧 Define servidor base do Swagger para localhost:8080
-                c.AddServer(new OpenApiServer { Url = "http://0.0.0.0:8080" });
-            });
+                // 🔧 Define servidor base do Swagger
+                //c.AddServer(new OpenApiServer { Url = "http://0.0.0.0:8080" }); // local
+                c.AddServer(new OpenApiServer { Url = "https://isepindoornavigationapi-vgq7.onrender.com" }); //remoto
+
+                });
 
             var app = builder.Build();
 
