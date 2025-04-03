@@ -21,7 +21,7 @@ namespace InDoorMappingAPI.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Server=tassi-t1-5318.jxf.gcp-europe-west1.cockroachlabs.cloud;Port=26257;Userid=1240605;Password=v2zNb2wsnA9NxRPWEsf4pw;Pooling=false;MinPoolSize=1;MaxPoolSize=20;Timeout=15;SslMode=Disable;Database=defaultdb;SSL Mode=Require");
+            optionsBuilder.UseNpgsql("Server=tassi-t1-5318.jxf.gcp-europe-west1.cockroachlabs.cloud;Port=26257;Userid=1240605;Password=AdminDB;Pooling=false;MinPoolSize=1;MaxPoolSize=20;Timeout=15;SslMode=Disable;Database=defaultdb;SSL Mode=Require");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -22,10 +22,19 @@ namespace InDoorMappingAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetUsuarioDTO>>> GetAll()
+        public async Task<ActionResult<GetUsuarioDTO>> GetAll()
         {
-            var usuarios = await _usuarioService.GetAllAsync();
-            return Ok(_mapper.Map<IEnumerable<GetUsuarioDTO>>(usuarios));
+            try
+            {
+                var users = await _usuarioService.GetAllAsync();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                // Log básico em consola
+                Console.WriteLine($"Erro em GetAll: {ex.Message}");
+                return StatusCode(500, "Erro interno ao obter os usuários.");
+            }
         }
 
         [HttpGet("{id}")]

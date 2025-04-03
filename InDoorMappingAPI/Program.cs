@@ -30,8 +30,6 @@ namespace InDoorMappingAPI
             builder.Services.AddEndpointsApiExplorer();
             //builder.Services.AddSwaggerGen();
 
-
-
             // Adding Repos
             builder.Services.AddScoped<IUsuarioRepo, UsuarioRepo>();
             builder.Services.AddScoped<IAcessibilidadeRepo, AcessibilidadeRepo>();
