@@ -21,7 +21,7 @@ namespace InDoorMappingAPI
             // Add Connection
 
             builder.Services.AddDbContext<DataContext>(options =>
-                options.UseNpgsql("Server=tassi-t1-5318.jxf.gcp-europe-west1.cockroachlabs.cloud;Port=26257;Userid=1240605;Password=v2zNb2wsnA9NxRPWEsf4pw;Pooling=false;MinPoolSize=1;MaxPoolSize=20;Timeout=15;SSL Mode=Require"));
+                options.UseNpgsql("Server=tassi-t1-5318.jxf.gcp-europe-west1.cockroachlabs.cloud;Port=26257;Userid=1240605;Password=DsHokI3guukQE7BkW-RC6g;Pooling=false;MinPoolSize=1;MaxPoolSize=20;Timeout=15;SSL Mode=Require"));
 
             // Add services to the container.
 
