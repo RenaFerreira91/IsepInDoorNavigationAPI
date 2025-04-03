@@ -104,11 +104,13 @@ namespace InDoorMappingAPI
             var app = builder.Build();
 
             // 🔧 Força a API a ouvir em http://localhost:8080
-            app.Urls.Add("http://localhost:8080");
+            //app.Urls.Add("http://localhost:8080");
+            app.Urls.Add("http://0.0.0.0:8080");
+
 
             // ✅ Ativa Swagger e Swagger UI
-           
-                app.UseSwagger();
+
+            app.UseSwagger();
                 app.UseSwaggerUI();
             
 
