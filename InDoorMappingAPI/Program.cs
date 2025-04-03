@@ -116,6 +116,7 @@ namespace InDoorMappingAPI
             app.UseCors("CorsPolicy");
 
             // ✅ Roteamento e controladores
+            app.UseAuthentication();  // <--- ADICIONAR ESTA LINHA
             app.UseAuthorization();
             app.MapControllers();
 
