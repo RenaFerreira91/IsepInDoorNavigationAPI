@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using InDoorMappingAPI.Data;
 using InDoorMappingAPI.Repos;
 using InDoorMappingAPI.Services;
@@ -7,6 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using InDoorMappingAPI.Repos.Interfaces;
 using InDoorMappingAPI.Services.Interfaces;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace InDoorMappingAPI
 {
@@ -26,7 +28,9 @@ namespace InDoorMappingAPI
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            //builder.Services.AddSwaggerGen();
+
+
 
             // Adding Repos
             builder.Services.AddScoped<IUsuarioRepo, UsuarioRepo>();
@@ -71,21 +75,48 @@ namespace InDoorMappingAPI
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
         };
     });
-            builder.WebHost.UseUrls("http://0.0.0.0:8080");
+
+
+            // 🔁 Configura CORS (permite chamadas de qualquer origem)
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
+
+            // 🔧 Adiciona controladores
+            builder.Services.AddControllers();
+
+            // 📄 Ativa Swagger
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Isep API", Version = "v1" });
+
+                // 🔧 Define servidor base do Swagger para localhost:8080
+                c.AddServer(new OpenApiServer { Url = "http://localhost:8080" });
+            });
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // 🔧 Força a API a ouvir em http://localhost:8080
+            app.Urls.Add("http://localhost:8080");
 
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            // ✅ Ativa Swagger e Swagger UI
+           
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            
 
+            // ✅ Ativa CORS
+            app.UseCors("CorsPolicy");
 
-            app.UseHttpsRedirection();
-
+            // ✅ Roteamento e controladores
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

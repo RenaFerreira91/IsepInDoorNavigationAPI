@@ -8,7 +8,6 @@ using InDoorMappingAPI.DTOs.POSTs;
 
 namespace InDoorMappingAPI.Controllers
 {
-    [Authorize(Roles = "Admin")]
     [ApiController]
     [Route("api/[controller]")]
     public class UsuariosController : ControllerBase

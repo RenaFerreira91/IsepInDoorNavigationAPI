@@ -5,7 +5,6 @@ using InDoorMappingAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-[Authorize(Roles = "Admin,Editor,Reader")]
 [ApiController]
 [Route("api/admin/[controller]")]
 public class CaminhosController : ControllerBase
