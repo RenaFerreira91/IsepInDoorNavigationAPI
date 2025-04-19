@@ -1,5 +1,5 @@
-﻿using InDoorMappingAPI.Data;
-using InDoorMappingAPI.Models;
+﻿using IndoorMappingAPI.Data;
+using IndoorMappingAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 public class MobilidadeRepo : IMobilidadeRepo

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace InDoorMappingAPI.Models
+namespace IndoorMappingAPI.Models
 {
     [Table("usuarios", Schema = "public")]
     public class Usuario

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using InDoorMappingAPI.Models;
+using IndoorMappingAPI.Models;
 
 public class LogService : ILogService
 {

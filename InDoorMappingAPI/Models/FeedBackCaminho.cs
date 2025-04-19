@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace InDoorMappingAPI.Models
+namespace IndoorMappingAPI.Models
 {
     [Table("feedbackcaminhos", Schema = "public")]
     public class FeedbackCaminho

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace InDoorMappingAPI.DTOs.POSTs
+namespace IndoorMappingAPI.DTOs.POSTs
 {
     public class PutUsuarioDTO
     {

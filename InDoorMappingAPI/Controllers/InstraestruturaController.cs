@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using InDoorMappingAPI.Models;
+using IndoorMappingAPI.Models;
 using Microsoft.AspNetCore.Authorization;
-using InDoorMappingAPI.Services.Interfaces;
-using InDoorMappingAPI.DTOs.GETs;
-using InDoorMappingAPI.DTOs.POSTs;
+using IndoorMappingAPI.Services.Interfaces;
+using IndoorMappingAPI.DTOs.GETs;
+using IndoorMappingAPI.DTOs.POSTs;
 
-namespace InDoorMappingAPI.Controllers.Public
+namespace IndoorMappingAPI.Controllers.Public
 {
     [AllowAnonymous]
     [ApiController]
@@ -23,7 +23,7 @@ namespace InDoorMappingAPI.Controllers.Public
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(string? tipo, string? piso)
+        public async Task<IActionResult> Get(string? tipo, int? piso)
         {
             var result = await _service.GetFilteredAsync(tipo, piso);
             return Ok(_mapper.Map<IEnumerable<GetInfraestruturaDTO>>(result));

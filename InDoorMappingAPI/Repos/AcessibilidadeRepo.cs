@@ -1,10 +1,10 @@
-﻿using InDoorMappingAPI.Data;
-using InDoorMappingAPI.Models;
-using InDoorMappingAPI.Repos.Interfaces;
+﻿using IndoorMappingAPI.Data;
+using IndoorMappingAPI.Models;
+using IndoorMappingAPI.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace InDoorMappingAPI.Repos
+namespace IndoorMappingAPI.Repos
 {
     public class AcessibilidadeRepo : IAcessibilidadeRepo
     {

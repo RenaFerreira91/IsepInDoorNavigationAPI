@@ -1,4 +1,4 @@
-﻿using InDoorMappingAPI.Models;
+﻿using IndoorMappingAPI.Models;
 
 public interface IBeaconRepo
 {

@@ -1,6 +1,6 @@
-﻿using InDoorMappingAPI.Models;
+﻿using IndoorMappingAPI.Models;
 
-namespace InDoorMappingAPI.Repos.Interfaces
+namespace IndoorMappingAPI.Repos.Interfaces
 {
     public interface IUsuarioRepo
     {

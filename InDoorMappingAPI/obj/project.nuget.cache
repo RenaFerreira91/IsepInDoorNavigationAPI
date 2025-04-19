@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w7EWOyksZTIWrfDSUS4UCD8QNS8E04HPvlOk++e2cwW1i1V+9H+E4E2vSSK2SWPed3qyujGAiyXeCegYkMEupQ==",
+  "dgSpecHash": "5uub6vxHuiGZlL4xcLpg/C834kdEgrxVrsBRxT81iYY1O2b7PVYUc9qt25RC39oEUuC1NhoadvtmPcbDkKbPFQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Renfe\\OneDrive - Instituto Superior de Engenharia do Porto\\Mestrado\\1Ano\\TASSI\\InDoorMappingAPI\\InDoorMappingAPI\\InDoorMappingAPI.csproj",
+  "projectFilePath": "C:\\Users\\Renfe\\OneDrive - Instituto Superior de Engenharia do Porto\\Mestrado\\1Ano\\TASSI\\InDoorMappingAPI\\InDoorMappingAPI\\IndoorMappingAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Renfe\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\Renfe\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

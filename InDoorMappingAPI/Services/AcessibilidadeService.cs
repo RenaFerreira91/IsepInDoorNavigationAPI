@@ -1,8 +1,8 @@
-﻿using InDoorMappingAPI.Models;
-using InDoorMappingAPI.Repos.Interfaces;
-using InDoorMappingAPI.Services.Interfaces;
+﻿using IndoorMappingAPI.Models;
+using IndoorMappingAPI.Repos.Interfaces;
+using IndoorMappingAPI.Services.Interfaces;
 
-namespace InDoorMappingAPI.Services
+namespace IndoorMappingAPI.Services
 {
     public class AcessibilidadeService : IAcessibilidadeService
     {

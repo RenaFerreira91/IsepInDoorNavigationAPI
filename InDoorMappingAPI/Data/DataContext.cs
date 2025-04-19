@@ -1,7 +1,7 @@
-﻿using InDoorMappingAPI.Models;
+﻿using IndoorMappingAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace InDoorMappingAPI.Data
+namespace IndoorMappingAPI.Data
 {
     public class DataContext : DbContext
     {
@@ -34,17 +34,6 @@ namespace InDoorMappingAPI.Data
                 .HasIndex(m => m.Tipo)
                 .IsUnique();
 
-            modelBuilder.Entity<Beacon>()
-                .HasMany(b => b.CaminhosOrigem)
-                .WithOne(c => c.Origem)
-                .HasForeignKey(c => c.OrigemBeaconId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Beacon>()
-                .HasMany(b => b.CaminhosDestino)
-                .WithOne(c => c.Destino)
-                .HasForeignKey(c => c.DestinoBeaconId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

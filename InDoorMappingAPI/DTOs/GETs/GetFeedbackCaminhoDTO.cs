@@ -1,4 +1,4 @@
-﻿namespace InDoorMappingAPI.DTOs.GETs
+﻿namespace IndoorMappingAPI.DTOs.GETs
 {
     public class GetFeedbackCaminhoDTO
     {

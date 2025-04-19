@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="..\build\InDoorMappingAPI.props" />
+  <Import Project="..\build\IndoorMappingAPI.props" />
 </Project>

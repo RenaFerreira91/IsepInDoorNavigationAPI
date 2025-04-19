@@ -1,10 +1,10 @@
-﻿using InDoorMappingAPI.Data;
-using InDoorMappingAPI.Models;
-using InDoorMappingAPI.Repos.Interfaces;
+﻿using IndoorMappingAPI.Data;
+using IndoorMappingAPI.Models;
+using IndoorMappingAPI.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace InDoorMappingAPI.Repos
+namespace IndoorMappingAPI.Repos
 {
     public class DiarioRepo : IDiarioRepo
     {

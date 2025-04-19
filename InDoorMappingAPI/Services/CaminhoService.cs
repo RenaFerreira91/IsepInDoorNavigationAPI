@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using InDoorMappingAPI.Models;
+using IndoorMappingAPI.Models;
 
 public class CaminhoService : ICaminhoService
 {
@@ -10,12 +10,12 @@ public class CaminhoService : ICaminhoService
     {
         _repo = repository;
     }
-    public async Task<IEnumerable<Caminho>> GetBetweenBeaconsAsync(long origemBeaconId, long destinoBeaconId, bool isAccessible)
+    public async Task<IEnumerable<Caminho>> GetBetweenInfraestruturasAsync(int origemId, int destinoId, bool isAccessible)
     {
         var caminhos = await _repo.GetAllAsync();
         var query = caminhos.Where(c =>
-            c.OrigemBeaconId == origemBeaconId && c.DestinoBeaconId == destinoBeaconId
-        );
+    c.OrigemId == origemId && c.DestinoId == destinoId
+);
 
         if (isAccessible)
             query = query.Where(c => c.Acessivel);
@@ -29,10 +29,10 @@ public class CaminhoService : ICaminhoService
         var query = caminhos.AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(origemNome))
-            query = query.Where(c => c.Origem.Nome.ToLower().Contains(origemNome.ToLower()));
+            query = query.Where(c => c.Origem.Descricao.ToLower().Contains(origemNome.ToLower()));
 
         if (!string.IsNullOrWhiteSpace(destinoNome))
-            query = query.Where(c => c.Destino.Nome.ToLower().Contains(destinoNome.ToLower()));
+            query = query.Where(c => c.Destino.Descricao.ToLower().Contains(destinoNome.ToLower()));
 
         if (isAccessible.HasValue)
             query = query.Where(c => c.Acessivel == isAccessible);

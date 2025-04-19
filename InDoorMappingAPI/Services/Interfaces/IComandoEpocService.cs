@@ -1,6 +1,6 @@
-﻿using InDoorMappingAPI.Models;
+﻿using IndoorMappingAPI.Models;
 
-namespace InDoorMappingAPI.Services.Interfaces
+namespace IndoorMappingAPI.Services.Interfaces
 {
     public interface IComandoEpocService
     {

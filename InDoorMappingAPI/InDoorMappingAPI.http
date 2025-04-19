@@ -1,6 +1,6 @@
-@InDoorMappingAPI_HostAddress = http://localhost:5058
+@IndoorMappingAPI_HostAddress = http://localhost:5058
 
-GET {{InDoorMappingAPI_HostAddress}}/weatherforecast/
+GET {{IndoorMappingAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

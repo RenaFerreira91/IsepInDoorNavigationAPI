@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace InDoorMappingAPI.Models
+namespace IndoorMappingAPI.Models
 {
     [Table("tiposinfraestrutura", Schema = "public")]
     public class TipoInfraestrutura

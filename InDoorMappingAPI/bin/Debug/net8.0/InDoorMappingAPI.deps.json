@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "InDoorMappingAPI/1.0.0": {
+      "IndoorMappingAPI/1.0.0": {
         "dependencies": {
           "AutoMapper": "14.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.14",
@@ -16,7 +16,7 @@
           "System.IdentityModel.Tokens.Jwt": "8.7.0"
         },
         "runtime": {
-          "InDoorMappingAPI.dll": {}
+          "IndoorMappingAPI.dll": {}
         }
       },
       "AutoMapper/14.0.0": {
@@ -681,7 +681,7 @@
     }
   },
   "libraries": {
-    "InDoorMappingAPI/1.0.0": {
+    "IndoorMappingAPI/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

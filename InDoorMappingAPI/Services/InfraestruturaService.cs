@@ -1,9 +1,9 @@
 ﻿
-using InDoorMappingAPI.Models;
-using InDoorMappingAPI.Repos.Interfaces;
-using InDoorMappingAPI.Services.Interfaces;
+using IndoorMappingAPI.Models;
+using IndoorMappingAPI.Repos.Interfaces;
+using IndoorMappingAPI.Services.Interfaces;
 
-namespace InDoorMappingAPI.Services
+namespace IndoorMappingAPI.Services
 {
     public class InfraestruturaService : IInfraestruturaService
     {
@@ -29,7 +29,7 @@ namespace InDoorMappingAPI.Services
             await _repo.AddAsync(entity);
         }
 
-        public async Task<IEnumerable<Infraestrutura>> GetFilteredAsync(string? tipo, string? piso)
+        public async Task<IEnumerable<Infraestrutura>> GetFilteredAsync(string? tipo, int? piso)
         {
             var all = await _repo.GetAllAsync();
             var query = all.AsQueryable();
@@ -37,8 +37,8 @@ namespace InDoorMappingAPI.Services
             if (!string.IsNullOrWhiteSpace(tipo))
                 query = query.Where(i => i.TipoInfraestrutura.Tipo.ToLower().Contains(tipo.ToLower()));
 
-            if (!string.IsNullOrWhiteSpace(piso))
-                query = query.Where(i => i.Piso.ToLower() == piso.ToLower());
+            if (piso!=null)
+                query = query.Where(i => i.Piso == piso);
 
             return query;
         }

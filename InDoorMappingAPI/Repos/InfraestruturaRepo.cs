@@ -1,9 +1,9 @@
-﻿using InDoorMappingAPI.Data;
-using InDoorMappingAPI.Models;
-using InDoorMappingAPI.Repos.Interfaces;
+﻿using IndoorMappingAPI.Data;
+using IndoorMappingAPI.Models;
+using IndoorMappingAPI.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace InDoorMappingAPI.Repos
+namespace IndoorMappingAPI.Repos
 {
     public class InfraestruturaRepo : IInfraestruturaRepo
     {
@@ -24,7 +24,7 @@ namespace InDoorMappingAPI.Repos
         {
             return await _context.Infraestruturas
                 .Include(i => i.TipoInfraestrutura)
-                .FirstOrDefaultAsync(i => i.InfraestruturaId == id);
+                .FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task AddAsync(Infraestrutura entity)

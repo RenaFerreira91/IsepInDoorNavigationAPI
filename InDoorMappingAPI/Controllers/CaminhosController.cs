@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using InDoorMappingAPI.DTOs.GETs;
-using InDoorMappingAPI.DTOs.POSTs;
-using InDoorMappingAPI.Models;
+using IndoorMappingAPI.DTOs.GETs;
+using IndoorMappingAPI.DTOs.POSTs;
+using IndoorMappingAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,9 +43,9 @@ public class CaminhosController : ControllerBase
     }
 
     [HttpGet("entre/{origemId}/{destinoId}")]
-    public async Task<IActionResult> GetEntreBeacons(long origemId, long destinoId, bool acessivel = false)
+    public async Task<IActionResult> GetEntreBeacons(int origemId, int destinoId, bool acessivel = false)
     {
-        var caminhos = await _service.GetBetweenBeaconsAsync(origemId, destinoId, acessivel);
+        var caminhos = await _service.GetBetweenInfraestruturasAsync(origemId, destinoId, acessivel);
         return Ok(_mapper.Map<IEnumerable<GetCaminhoDTO>>(caminhos));
     }
 
