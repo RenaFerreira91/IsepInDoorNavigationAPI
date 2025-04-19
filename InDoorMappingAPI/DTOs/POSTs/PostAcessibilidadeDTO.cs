@@ -1,4 +1,4 @@
-﻿namespace IndoorMappingAPI.DTOs.POSTs
+﻿namespace InDoorMappingAPI.DTOs.POSTs
 {
     public class PostAcessibilidadeDTO
     {

@@ -1,5 +1,5 @@
-﻿using IndoorMappingAPI.Data;
-using IndoorMappingAPI.Models;
+﻿using InDoorMappingAPI.Data;
+using InDoorMappingAPI.Models;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,7 +1,7 @@
-﻿using IndoorMappingAPI.Models;
+﻿using InDoorMappingAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace IndoorMappingAPI.Data
+namespace InDoorMappingAPI.Data
 {
     public class DataContext : DbContext
     {

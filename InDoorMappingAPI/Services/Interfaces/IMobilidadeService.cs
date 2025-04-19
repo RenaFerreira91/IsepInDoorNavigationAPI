@@ -1,4 +1,4 @@
-﻿using IndoorMappingAPI.Models;
+﻿using InDoorMappingAPI.Models;
 using System.Threading.Tasks;
 
 public interface IMobilidadeService

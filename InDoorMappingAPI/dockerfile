@@ -1,14 +1,14 @@
 # Etapa de build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["IndoorMappingAPI.csproj", "."]
-RUN dotnet restore "IndoorMappingAPI.csproj"
+COPY ["InDoorMappingAPI.csproj", "."]
+RUN dotnet restore "InDoorMappingAPI.csproj"
 COPY . .
-RUN dotnet publish "IndoorMappingAPI.csproj" -c Release -o /app/publish
+RUN dotnet publish "InDoorMappingAPI.csproj" -c Release -o /app/publish
 
 # Etapa de runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/publish .
 
-ENTRYPOINT ["dotnet", "IndoorMappingAPI.dll"]
+ENTRYPOINT ["dotnet", "InDoorMappingAPI.dll"]

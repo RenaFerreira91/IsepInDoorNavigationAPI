@@ -1,10 +1,10 @@
-﻿using IndoorMappingAPI.Data;
-using IndoorMappingAPI.Models;
-using IndoorMappingAPI.Repos.Interfaces;
+﻿using InDoorMappingAPI.Data;
+using InDoorMappingAPI.Models;
+using InDoorMappingAPI.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace IndoorMappingAPI.Repos
+namespace InDoorMappingAPI.Repos
 {
     public class UsuarioRepo : IUsuarioRepo
     {

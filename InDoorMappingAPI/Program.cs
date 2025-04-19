@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using IndoorMappingAPI.Data;
-using IndoorMappingAPI.Repos;
-using IndoorMappingAPI.Services;
+using InDoorMappingAPI.Data;
+using InDoorMappingAPI.Repos;
+using InDoorMappingAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using IndoorMappingAPI.Repos.Interfaces;
-using IndoorMappingAPI.Services.Interfaces;
+using InDoorMappingAPI.Repos.Interfaces;
+using InDoorMappingAPI.Services.Interfaces;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 
-namespace IndoorMappingAPI
+namespace InDoorMappingAPI
 {
     public class Program
     {

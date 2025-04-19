@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace IndoorMappingAPI.Models
+namespace InDoorMappingAPI.Models
 {
     [Table("logs", Schema = "public")]
     public class Log

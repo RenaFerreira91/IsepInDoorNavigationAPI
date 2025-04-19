@@ -2964,11 +2964,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Renfe\\OneDrive - Instituto Superior de Engenharia do Porto\\Mestrado\\1Ano\\TASSI\\InDoorMappingAPI\\InDoorMappingAPI\\InDoorMappingAPI.csproj",
-      "projectName": "InDoorMappingAPI",
-      "projectPath": "C:\\Users\\Renfe\\OneDrive - Instituto Superior de Engenharia do Porto\\Mestrado\\1Ano\\TASSI\\InDoorMappingAPI\\InDoorMappingAPI\\InDoorMappingAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Renfe\\Desktop\\TASSI\\IsepInDoorNavigationAPI\\InDoorMappingAPI\\IndoorMappingAPI.csproj",
+      "projectName": "IndoorMappingAPI",
+      "projectPath": "C:\\Users\\Renfe\\Desktop\\TASSI\\IsepInDoorNavigationAPI\\InDoorMappingAPI\\IndoorMappingAPI.csproj",
       "packagesPath": "C:\\Users\\Renfe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Renfe\\OneDrive - Instituto Superior de Engenharia do Porto\\Mestrado\\1Ano\\TASSI\\InDoorMappingAPI\\InDoorMappingAPI\\obj\\",
+      "outputPath": "C:\\Users\\Renfe\\Desktop\\TASSI\\IsepInDoorNavigationAPI\\InDoorMappingAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

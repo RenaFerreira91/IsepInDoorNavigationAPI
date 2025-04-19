@@ -1,9 +1,9 @@
 ﻿
-using IndoorMappingAPI.Models;
-using IndoorMappingAPI.Repos.Interfaces;
-using IndoorMappingAPI.Services.Interfaces;
+using InDoorMappingAPI.Models;
+using InDoorMappingAPI.Repos.Interfaces;
+using InDoorMappingAPI.Services.Interfaces;
 
-namespace IndoorMappingAPI.Services
+namespace InDoorMappingAPI.Services
 {
     public class InfraestruturaService : IInfraestruturaService
     {

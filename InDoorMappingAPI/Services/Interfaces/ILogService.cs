@@ -1,4 +1,4 @@
-﻿using IndoorMappingAPI.Models;
+﻿using InDoorMappingAPI.Models;
 
 public interface ILogService
 {

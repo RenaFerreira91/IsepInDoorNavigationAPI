@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using IndoorMappingAPI.Models;
+using InDoorMappingAPI.Models;
 
 public class MobilidadeService : IMobilidadeService
 {

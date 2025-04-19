@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using IndoorMappingAPI.Services;
+using InDoorMappingAPI.Services;
 using AutoMapper;
-using IndoorMappingAPI.Models;
-using IndoorMappingAPI.DTOs.GETs;
-using IndoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.Models;
+using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.DTOs.POSTs;
 
-namespace IndoorMappingAPI.Controllers.Admin
+namespace InDoorMappingAPI.Controllers.Admin
 {
     [ApiController]
     [Route("api/admin/[controller]")]

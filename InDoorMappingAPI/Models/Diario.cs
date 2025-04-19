@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IndoorMappingAPI.Models
+namespace InDoorMappingAPI.Models
 {
     [Table("diario", Schema = "public")]
     public class Diario

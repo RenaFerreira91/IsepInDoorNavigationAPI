@@ -1,6 +1,6 @@
-﻿using IndoorMappingAPI.Models;
+﻿using InDoorMappingAPI.Models;
 
-namespace IndoorMappingAPI.Services.Interfaces
+namespace InDoorMappingAPI.Services.Interfaces
 {
     public interface IFeedbackCaminhoService
     {

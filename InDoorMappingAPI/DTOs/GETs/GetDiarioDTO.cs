@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IndoorMappingAPI.DTOs.GETs
+namespace InDoorMappingAPI.DTOs.GETs
 {
     public class GetDiarioDto
     {

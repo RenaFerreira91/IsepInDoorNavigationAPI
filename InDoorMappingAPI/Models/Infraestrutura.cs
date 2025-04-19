@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
-using IndoorMappingAPI.Models;
+using InDoorMappingAPI.Models;
 
-namespace IndoorMappingAPI.Models
+namespace InDoorMappingAPI.Models
 {
     [Table("infraestruturas", Schema = "public")]
     public class Infraestrutura

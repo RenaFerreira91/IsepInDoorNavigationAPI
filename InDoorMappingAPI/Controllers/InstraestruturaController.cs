@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using IndoorMappingAPI.Models;
+using InDoorMappingAPI.Models;
 using Microsoft.AspNetCore.Authorization;
-using IndoorMappingAPI.Services.Interfaces;
-using IndoorMappingAPI.DTOs.GETs;
-using IndoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.Services.Interfaces;
+using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.DTOs.POSTs;
 
-namespace IndoorMappingAPI.Controllers.Public
+namespace InDoorMappingAPI.Controllers.Public
 {
     [AllowAnonymous]
     [ApiController]

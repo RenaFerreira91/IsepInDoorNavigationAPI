@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using IndoorMappingAPI.DTOs.GETs;
-using IndoorMappingAPI.DTOs.POSTs;
-using IndoorMappingAPI.Models;
+using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

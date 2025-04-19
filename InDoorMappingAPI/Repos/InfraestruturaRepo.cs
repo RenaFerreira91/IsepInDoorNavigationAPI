@@ -1,9 +1,9 @@
-﻿using IndoorMappingAPI.Data;
-using IndoorMappingAPI.Models;
-using IndoorMappingAPI.Repos.Interfaces;
+﻿using InDoorMappingAPI.Data;
+using InDoorMappingAPI.Models;
+using InDoorMappingAPI.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace IndoorMappingAPI.Repos
+namespace InDoorMappingAPI.Repos
 {
     public class InfraestruturaRepo : IInfraestruturaRepo
     {
