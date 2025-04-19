@@ -8,7 +8,7 @@ namespace InDoorMappingAPI.Models
     public class Acessibilidade
     {
         [Key]
-        [Column("acessibilidadeid")]
+        [Column("id")]
         public long AcessibilidadeId { get; set; }
 
         [Required]
