@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 public class Caminho
 {
     [Key]
-    [Column("caminhoid")]
+    [Column("id")]
     public long CaminhoId { get; set; }
 
     [Column("origemid")]
