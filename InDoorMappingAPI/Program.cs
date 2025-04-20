@@ -32,7 +32,6 @@ namespace InDoorMappingAPI
 
             // Adding Repos
             builder.Services.AddScoped<IUsuarioRepo, UsuarioRepo>();
-            builder.Services.AddScoped<IAcessibilidadeRepo, AcessibilidadeRepo>();
             builder.Services.AddScoped<IBeaconRepo, BeaconRepo>();
             builder.Services.AddScoped<ILogRepo, LogRepo>();
             builder.Services.AddScoped<IMobilidadeRepo, MobilidadeRepo>();
@@ -44,7 +43,6 @@ namespace InDoorMappingAPI
 
             // Adding Services
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-            builder.Services.AddScoped<IAcessibilidadeService, AcessibilidadeService>();
             builder.Services.AddScoped<IBeaconService, BeaconService>();
             builder.Services.AddScoped<ILogService, LogService>();
             builder.Services.AddScoped<IMobilidadeService, MobilidadeService>();

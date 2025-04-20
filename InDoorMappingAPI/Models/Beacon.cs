@@ -23,8 +23,5 @@ namespace InDoorMappingAPI.Models
         [Required]
         [Column("localizacao")]
         public string Localizacao { get; set; }
-
-        public ICollection<Caminho> CaminhosOrigem { get; set; }
-        public ICollection<Caminho> CaminhosDestino { get; set; }
     }
 }

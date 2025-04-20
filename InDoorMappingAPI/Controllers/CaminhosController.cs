@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using InDoorMappingAPI.DTOs.GETs;
 using InDoorMappingAPI.DTOs.POSTs;
-using InDoorMappingAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/admin/[controller]")]
+[Route("api/[controller]")]
 public class CaminhosController : ControllerBase
 {
     private readonly ICaminhoService _service;
@@ -18,42 +17,17 @@ public class CaminhosController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpGet("GetAll")]
-    public async Task<ActionResult<IEnumerable<GetCaminhoDTO>>> GetAll()
-    {
-        var list = await _service.GetAllAsync();
-        return Ok(_mapper.Map<IEnumerable<GetCaminhoDTO>>(list));
-    }
 
-    [AllowAnonymous]
-    [HttpGet("GetFiltered")]
-    public async Task<IActionResult> GetFiltered(string? origemNome, string? destinoNome, bool? acessivel)
+    [HttpGet("melhor-caminho")]
+    public async Task<IActionResult> GetMelhorCaminho([FromQuery] long destinoId, [FromQuery] List<long> bloqueados = null)
     {
-        var caminhos = await _service.GetFilteredAsync(origemNome, destinoNome, acessivel);
-        return Ok(_mapper.Map<IEnumerable<GetCaminhoDTO>>(caminhos));
-    }
+        bloqueados ??= new List<long>();
 
-    [Authorize(Roles = "Admin,Editor")]
-    [HttpPost]
-    public async Task<IActionResult> Create(PostCaminhoDTO dto)
-    {
-        var entity = _mapper.Map<Caminho>(dto);
-        await _service.AddAsync(entity);
-        return Created("", _mapper.Map<GetCaminhoDTO>(entity));
-    }
+        var resultado = await _service.ObterMelhorCaminhoAsync(destinoId, bloqueados);
 
-    [HttpGet("entre/{origemId}/{destinoId}")]
-    public async Task<IActionResult> GetEntreBeacons(int origemId, int destinoId, bool acessivel = false)
-    {
-        var caminhos = await _service.GetBetweenInfraestruturasAsync(origemId, destinoId, acessivel);
-        return Ok(_mapper.Map<IEnumerable<GetCaminhoDTO>>(caminhos));
-    }
+        if (resultado.InfraestruturasIds == null || !resultado.InfraestruturasIds.Any())
+            return NotFound("Nenhum caminho acessível encontrado.");
 
-    [HttpGet("coordenadas")]
-    public async Task<IActionResult> GetCaminhosComCoordenadas()
-    {
-        var caminhos = await _service.GetAllAsync(); // Certifica-te que inclui Origem e Destino
-        var resultado = _mapper.Map<IEnumerable<GetCaminhoMapaDTO>>(caminhos);
         return Ok(resultado);
     }
 }

@@ -1,10 +1,8 @@
 ﻿using InDoorMappingAPI.Models;
+using System.Threading.Tasks;
 
 public interface ICaminhoRepo
 {
-    Task AddAsync(Caminho entity);
-    Task DeleteAsync(long id);
-    Task<List<Caminho>> GetAllAsync();
-    Task<Caminho> GetByIdAsync(long id);
-    Task UpdateAsync(Caminho entity);
+    Task<List<Caminho>> ObterCaminhos(int origemId, int destinoId);
+    Task<List<Caminho>> ObterTodosCaminhosAcessiveisAsync();
 }

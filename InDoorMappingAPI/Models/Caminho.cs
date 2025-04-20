@@ -7,28 +7,27 @@ public class Caminho
 {
     [Key]
     [Column("id")]
-    public long CaminhoId { get; set; }
+    public long Id { get; set; }
 
+    [Required]
     [Column("origemid")]
-    public int OrigemId { get; set; }
+    public long OrigemId { get; set; }
 
+    [Required]
     [Column("destinoid")]
-    public int DestinoId { get; set; }
+    public long DestinoId { get; set; }
 
+    [Required]
     [Column("distancia")]
     public double Distancia { get; set; }
 
+    [Required]
     [Column("acessivel")]
     public bool Acessivel { get; set; }
 
     [Column("acessibilidadeid")]
     public long? AcessibilidadeId { get; set; }
 
-    [ForeignKey("OrigemId")]
-    public Infraestrutura Origem { get; set; }
-
-    [ForeignKey("DestinoId")]
-    public Infraestrutura Destino { get; set; }
-
-    public Acessibilidade Acessibilidade { get; set; }
+    [ForeignKey("AcessibilidadeId")]
+    public virtual Acessibilidade? Acessibilidade { get; set; }
 }

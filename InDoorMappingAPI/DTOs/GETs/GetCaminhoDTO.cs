@@ -6,18 +6,13 @@ namespace InDoorMappingAPI.DTOs.GETs
 {
     public class GetCaminhoDTO
     {
-    
-        public long CaminhoId { get; set; }
 
-        public int OrigemId { get; set; }
-
-        public int DestinoId { get; set; }
-
+        public long Id { get; set; }
+        public long OrigemId { get; set; }
+        public long DestinoId { get; set; }
         public double Distancia { get; set; }
-
+        public string TipoAcessibilidade { get; set; }
         public bool Acessivel { get; set; }
-
-        public int? AcessibilidadeId { get; set; }
 
     }
 }

@@ -1,12 +1,12 @@
-﻿using InDoorMappingAPI.Models;
+﻿using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.Models;
 
 public interface ICaminhoService
 {
-    Task<IEnumerable<Caminho>> GetFilteredAsync(string? origemNome, string? destinoNome, bool? isAccessible);
-    Task<IEnumerable<Caminho>> GetBetweenInfraestruturasAsync(int origemId, int destinoId, bool isAccessible);
-    Task AddAsync(Caminho entity);
-    Task DeleteAsync(long id);
-    Task<List<Caminho>> GetAllAsync();
-    Task<Caminho> GetByIdAsync(long id);
-    Task UpdateAsync(Caminho entity);
+    // Obtém os caminhos entre dois pontos (origem e destino), com opção de filtrar apenas os acessíveis.
+    Task<List<GetCaminhoDTO>> ObterCaminhos(int origemId, int destinoId, bool apenasAcessiveis = false);
+
+    // Calcula o melhor caminho acessível entre as entradas do ISEP e o destino especificado, 
+    // evitando infraestruturas bloqueadas (ex: rampas).
+    Task<GetMelhorCaminhoDTO> ObterMelhorCaminhoAsync(long destinoId, List<long> infraestruturasBloqueadas);
 }

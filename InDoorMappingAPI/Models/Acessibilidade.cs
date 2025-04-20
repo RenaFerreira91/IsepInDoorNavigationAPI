@@ -8,19 +8,12 @@ namespace InDoorMappingAPI.Models
     public class Acessibilidade
     {
         [Key]
-        [Column("id")]
-        public long AcessibilidadeId { get; set; }
+        public long Id { get; set; }
 
         [Required]
-        [Column("descricao")]
-        public string Descricao { get; set; }
+        [MaxLength(100)]
+        public string Tipo { get; set; }
 
-        [Column("latitude")]
-        public double Latitude { get; set; }
-
-        [Column("longitude")]
-        public double Longitude { get; set; }
-
-        public ICollection<Caminho> Caminhos { get; set; }
+        public virtual ICollection<Caminho> Caminhos { get; set; }
     }
 }

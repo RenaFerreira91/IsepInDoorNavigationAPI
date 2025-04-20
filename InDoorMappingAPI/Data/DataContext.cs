@@ -26,33 +26,7 @@ namespace InDoorMappingAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Usuario>()
-                .HasIndex(u => u.Email)
-                .IsUnique();
-
-            modelBuilder.Entity<Mobilidade>()
-                .HasIndex(m => m.Tipo)
-                .IsUnique();
-            // Relação com Origem
-            modelBuilder.Entity<Caminho>()
-                .HasOne(c => c.Origem)
-                .WithMany(i => i.CaminhosOrigem)
-                .HasForeignKey(c => c.OrigemId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Relação com Destino
-            modelBuilder.Entity<Caminho>()
-                .HasOne(c => c.Destino)
-                .WithMany(i => i.CaminhosDestino)
-                .HasForeignKey(c => c.DestinoId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Relação com Acessibilidade
-            modelBuilder.Entity<Caminho>()
-                .HasOne(c => c.Acessibilidade)
-                .WithMany(a => a.Caminhos)
-                .HasForeignKey(c => c.AcessibilidadeId)
-                .OnDelete(DeleteBehavior.SetNull); // ou Restrict
+          
 
         }
     }

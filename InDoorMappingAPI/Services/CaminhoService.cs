@@ -1,51 +1,112 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using InDoorMappingAPI.Data;
+using InDoorMappingAPI.DTOs.GETs;
 using InDoorMappingAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
-public class CaminhoService : ICaminhoService
+namespace InDoorMappingAPI
 {
-    private readonly ICaminhoRepo _repo;
-
-    public CaminhoService(ICaminhoRepo repository)
+    public class CaminhoService : ICaminhoService
     {
-        _repo = repository;
+        private readonly ICaminhoRepo _repo;
+        private readonly DataContext _context;
+        private readonly IMapper _mapper;
+
+        public CaminhoService(ICaminhoRepo repository, DataContext context, IMapper mapper)
+        {
+            _repo = repository;
+            _context = context;
+            _mapper = mapper;
+        }
+
+        public async Task<List<GetCaminhoDTO>> ObterCaminhos(int origemId, int destinoId, bool apenasAcessiveis = false)
+        {
+            var caminhos = await _repo.ObterCaminhos(origemId, destinoId);
+
+            if (apenasAcessiveis)
+                caminhos = caminhos.Where(c => c.Acessivel).ToList();
+
+            return _mapper.Map<List<GetCaminhoDTO>>(caminhos);
+        }
+
+        public async Task<GetMelhorCaminhoDTO> ObterMelhorCaminhoAsync(long destinoId, List<long> infraestruturasBloqueadas)
+        {
+            var caminhos = await _repo.ObterTodosCaminhosAcessiveisAsync();
+
+
+            var grafo = new Dictionary<long, List<(long destino, double distancia)>>();
+
+            foreach (var c in caminhos)
+            {
+                if (infraestruturasBloqueadas.Contains(c.OrigemId) || infraestruturasBloqueadas.Contains(c.DestinoId))
+                    continue;
+
+                if (!grafo.ContainsKey(c.OrigemId))
+                    grafo[c.OrigemId] = new List<(long, double)>();
+
+                if (!grafo.ContainsKey(c.DestinoId))
+                    grafo[c.DestinoId] = new List<(long, double)>();
+
+                grafo[c.OrigemId].Add((c.DestinoId, c.Distancia));
+                grafo[c.DestinoId].Add((c.OrigemId, c.Distancia));
+            }
+
+            var entradas = new List<long> { 1, 13 };
+
+            foreach (var entrada in entradas)
+            {
+                var caminho = BFSComPeso(grafo, entrada, destinoId);
+                if (caminho != null)
+                {
+                    return new GetMelhorCaminhoDTO
+                    {
+                        InfraestruturasIds = caminho,
+                        UsouEntradaAlternativa = entrada == 13,
+                        Mensagem = "Caminho acessível encontrado."
+                    };
+                }
+            }
+
+            return new GetMelhorCaminhoDTO
+            {
+                InfraestruturasIds = null,
+                UsouEntradaAlternativa = false,
+                Mensagem = "Sem caminho acessível encontrado com as condições atuais."
+            };
+        }
+
+        private List<long> BFSComPeso(Dictionary<long, List<(long destino, double distancia)>> grafo, long origem, long destino)
+        {
+            var fila = new Queue<List<long>>();
+            var visitados = new HashSet<long>();
+            fila.Enqueue(new List<long> { origem });
+
+            while (fila.Count > 0)
+            {
+                var caminho = fila.Dequeue();
+                var atual = caminho.Last();
+
+                if (atual == destino)
+                    return caminho;
+
+                if (!grafo.ContainsKey(atual))
+                    continue;
+
+                foreach (var vizinho in grafo[atual])
+                {
+                    if (!visitados.Contains(vizinho.destino))
+                    {
+                        var novoCaminho = new List<long>(caminho) { vizinho.destino };
+                        fila.Enqueue(novoCaminho);
+                        visitados.Add(vizinho.destino);
+                    }
+                }
+            }
+
+            return null;
+        }
     }
-    public async Task<IEnumerable<Caminho>> GetBetweenInfraestruturasAsync(int origemId, int destinoId, bool isAccessible)
-    {
-        var caminhos = await _repo.GetAllAsync();
-        var query = caminhos.Where(c =>
-    c.OrigemId == origemId && c.DestinoId == destinoId
-);
 
-        if (isAccessible)
-            query = query.Where(c => c.Acessivel);
-
-        return query.OrderBy(c => c.Distancia);
-    }
-
-    public async Task<IEnumerable<Caminho>> GetFilteredAsync(string? origemNome, string? destinoNome, bool? isAccessible)
-    {
-        var caminhos = await _repo.GetAllAsync();
-        var query = caminhos.AsQueryable();
-
-        if (!string.IsNullOrWhiteSpace(origemNome))
-            query = query.Where(c => c.Origem.Descricao.ToLower().Contains(origemNome.ToLower()));
-
-        if (!string.IsNullOrWhiteSpace(destinoNome))
-            query = query.Where(c => c.Destino.Descricao.ToLower().Contains(destinoNome.ToLower()));
-
-        if (isAccessible.HasValue)
-            query = query.Where(c => c.Acessivel == isAccessible);
-
-        return query;
-    }
-    public async Task<List<Caminho>> GetAllAsync() => await _repo.GetAllAsync();
-
-    public async Task<Caminho> GetByIdAsync(long id) => await _repo.GetByIdAsync(id);
-
-    public async Task AddAsync(Caminho entity) => await _repo.AddAsync(entity);
-
-    public async Task UpdateAsync(Caminho entity) => await _repo.UpdateAsync(entity);
-
-    public async Task DeleteAsync(long id) => await _repo.DeleteAsync(id);
 }

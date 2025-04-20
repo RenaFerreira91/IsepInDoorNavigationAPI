@@ -8,33 +8,29 @@ namespace InDoorMappingAPI.Models
     [Table("infraestruturas", Schema = "public")]
     public class Infraestrutura
     {
+
         [Key]
-        [Column("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
-        [Column("tipoinfraestruturaid")]
-        public int TipoInfraestruturaId { get; set; }
+        [Required]
+        [ForeignKey("TipoInfraestrutura")]
+        public long TipoInfraestruturaId { get; set; }
 
-        [Column("descricao")]
+        [MaxLength(255)]
         public string Descricao { get; set; }
 
-        [Column("latitude")]
+        [Required]
         public double Latitude { get; set; }
 
-        [Column("longitude")]
+        [Required]
         public double Longitude { get; set; }
 
-        [Column("piso")]
+        [Required]
         public int Piso { get; set; }
 
-        [Column("acessivel")]
-        public bool Acessivel { get; set; }
+        [Required]
+        public bool Acessivel { get; set; } = true;
 
-        // Relações
-        [ForeignKey("TipoInfraestruturaId")]
-        public TipoInfraestrutura TipoInfraestrutura { get; set; }
-
-        public ICollection<Caminho> CaminhosOrigem { get; set; }
-        public ICollection<Caminho> CaminhosDestino { get; set; }
+        public virtual TipoInfraestrutura TipoInfraestrutura { get; set; }
     }
 }
