@@ -1,13 +1,11 @@
-﻿using InDoorMappingAPI.Models;
+﻿using InDoorMappingAPI.DTOs.GETs;
 using InDoorMappingAPI.Models;
 
 namespace InDoorMappingAPI.Services.Interfaces
 {
     public interface IInfraestruturaService
     {
-        Task AddAsync(Infraestrutura entity);
-        Task<IEnumerable<Infraestrutura>> GetAllAsync();
-        Task<Infraestrutura> GetByIdAsync(int id);
-        Task<IEnumerable<Infraestrutura>> GetFilteredAsync(string? tipo, int? piso);
+        Task<GetInfraestruturaDTO> GetByIdAsync(int id);
+        Task<IEnumerable<GetInfraestruturaDTO>> GetFilteredAsync(string? tipo, int? piso);
     }
 }

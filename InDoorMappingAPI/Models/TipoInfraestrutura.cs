@@ -7,10 +7,12 @@ namespace InDoorMappingAPI.Models
     public class TipoInfraestrutura
     {
         [Key]
+        [Column("id")]
         public long Id { get; set; }
 
         [Required]
         [MaxLength(100)]
+        [Column("tipo")]
         public string Tipo { get; set; }
 
         public virtual ICollection<Infraestrutura> Infraestruturas { get; set; }

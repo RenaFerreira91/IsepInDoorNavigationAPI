@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InDoorMappingAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee06a25ffd80fb054ec368cf74575022c080b00d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3665db77b759817efdbd4826c2d7a8b5c0011859")]
 [assembly: System.Reflection.AssemblyProductAttribute("InDoorMappingAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InDoorMappingAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

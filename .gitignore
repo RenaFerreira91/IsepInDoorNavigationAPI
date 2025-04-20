@@ -1,0 +1,65 @@
+# Ficheiros do Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build Results
+bin/
+obj/
+out/
+
+# Pacotes
+packages/
+*.nupkg
+*.snupkg
+
+# Ficheiros do Rider
+.idea/
+
+# Logs
+*.log
+
+# User-specific files
+*.userosscache
+*.sln.docstates
+
+# Configurações locais
+appsettings.Development.json
+appsettings.Local.json
+
+# Backup e temporários
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+# Ficheiros do sistema
+ehthumbs.db
+desktop.ini
+
+# Secrets (caso uses dotnet user-secrets)
+secrets.json
+
+# Publish output
+publish/
+
+# Teste de cobertura
+coverage/
+*.coverage
+*.coveragexml
+
+# Test results
+TestResults/
+
+# Rider / ReSharper
+*.DotSettings.user
+.ReSharper*/
+
+# IDEs diversas
+*.code-workspace
+*.vscode/
+
+# Outros
+node_modules/
+.env
