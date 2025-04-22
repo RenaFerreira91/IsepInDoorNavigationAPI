@@ -46,10 +46,10 @@ namespace InDoorMappingAPI.Controllers
             return Ok(_mapper.Map<GetUsuarioDTO>(usuario));
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Create(PostUsuarioDTO dto)
+        [HttpGet("NovoUsuario")]
+        public async Task<ActionResult> Create(string nome,string email, int tipo, int mobilidadeId = 1)
         {
-            var usuario = _mapper.Map<Usuario>(dto);
+            var usuario = new Usuario() { Nome = nome, Email = email, TipoUsuarioId = tipo, MobilidadeId = mobilidadeId };
             await _usuarioService.AddAsync(usuario);
             var readDTO = _mapper.Map<GetUsuarioDTO>(usuario);
             return CreatedAtAction(nameof(GetById), new { id = readDTO.UsuarioId }, readDTO);
