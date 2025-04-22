@@ -55,7 +55,7 @@ namespace InDoorMappingAPI.Controllers
         [HttpPost("register2")]
         public async Task<IActionResult> Register(PostRegisterDTO dto)
         {
-            if (await _context.Usuarios.AnyAsync(u => u.Email == email))
+            if (await _context.Usuarios.AnyAsync(u => u.Email == dto.Email))
                 return BadRequest("Email já está em uso.");
 
 
