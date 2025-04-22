@@ -52,6 +52,34 @@ namespace InDoorMappingAPI.Controllers
             var token = _jwtService.GenerateToken(usuario);
             return Ok(new { token });
         }
+        [HttpPost("register2")]
+        public async Task<IActionResult> Register(PostRegisterDTO dto)
+        {
+            if (await _context.Usuarios.AnyAsync(u => u.Email == email))
+                return BadRequest("Email já está em uso.");
+
+
+            var usuario = new Usuario
+            {
+                Nome = dto.Nome,
+                Email = dto.Email,
+                TipoUsuarioId = dto.TipoId,
+                MobilidadeId = dto.MobilidadeId,
+            };
+
+            var hasher = new PasswordHasher<Usuario>();
+            usuario.PasswordHash = hasher.HashPassword(usuario, dto.Password);
+
+            await _context.Usuarios.AddAsync(usuario);
+            await _context.SaveChangesAsync();
+
+            // carrega o TipoUsuario manualmente
+            usuario.TipoUsuario = await _context.TiposUsuarios.FindAsync(dto.TipoId);
+
+            // agora sim, podes gerar o token
+            var token = _jwtService.GenerateToken(usuario);
+            return Ok(new { token });
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(PostLoginDTO dto)
