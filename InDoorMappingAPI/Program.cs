@@ -51,6 +51,8 @@ namespace InDoorMappingAPI
             builder.Services.AddScoped<IComandoEpocService, ComandoEpocService>();
             builder.Services.AddScoped<IDiarioService, DiarioService>();
             builder.Services.AddScoped<IFeedbackCaminhoService, FeedbackCaminhoService>();
+            builder.Services.AddScoped<JwtService>();
+
 
             // Adding AutoMapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

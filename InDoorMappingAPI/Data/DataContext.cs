@@ -17,6 +17,7 @@ namespace InDoorMappingAPI.Data
         public DbSet<ComandoEpoc> ComandosEpoc { get; set; }
         public DbSet<Diario> Diario { get; set; }
         public DbSet<FeedbackCaminho> FeedbackCaminhos { get; set; }
+        public DbSet<TipoUsuario> TiposUsuarios { get; set; } 
 
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

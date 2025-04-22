@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 public class TipoUsuario
 {
     [Key]
-    [Column("tipousuarioid")]
+    [Column("id")]
     public int TipoUsuarioId { get; set; }
 
     [Required]
