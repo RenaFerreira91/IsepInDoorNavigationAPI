@@ -1,4 +1,6 @@
-﻿using InDoorMappingAPI.Models;
+﻿using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.DTOs.PUTs;
+using InDoorMappingAPI.Models;
 
 namespace InDoorMappingAPI.Services.Interfaces
 {
@@ -6,8 +8,8 @@ namespace InDoorMappingAPI.Services.Interfaces
     {
         Task AddAsync(Usuario usuario);
         Task DeleteAsync(long id);
-        Task<List<Usuario>> GetAllAsync();
-        Task<Usuario> GetByIdAsync(long id);
-        Task UpdateAsync(Usuario usuario);
+        Task<List<GetUsuarioDTO>> GetAllAsync();
+        Task<GetUsuarioDTO> GetByIdAsync(long id);
+        Task UpdateAsync(PutUsuarioDTO dto);
     }
 }

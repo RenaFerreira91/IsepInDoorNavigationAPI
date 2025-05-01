@@ -75,7 +75,7 @@ namespace InDoorMappingAPI
     });
 
 
-            // 🔁 Configura CORS (permite chamadas de qualquer origem)
+            // Configura CORS (permite chamadas de qualquer origem)
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", policy =>
@@ -86,39 +86,42 @@ namespace InDoorMappingAPI
                 });
             });
 
-            // 🔧 Adiciona controladores
+            // Adiciona controladores
             builder.Services.AddControllers();
 
-            // 📄 Ativa Swagger
+            // Ativa Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Isep API", Version = "v1" });
 
-                // 🔧 Define servidor base do Swagger
-                //c.AddServer(new OpenApiServer { Url = "http://0.0.0.0:8080" }); // local
-                c.AddServer(new OpenApiServer { Url = "https://isepindoornavigationapi-vgq7.onrender.com" }); //remoto
+                // Define servidor base do Swagger
+#if DEBUG
+                c.AddServer(new OpenApiServer { Url = "http://localhost:8080" });
+#else
+                c.AddServer(new OpenApiServer { Url = "https://isepindoornavigationapi-vgq7.onrender.com" });
+#endif
 
-                });
+            });
 
             var app = builder.Build();
 
-            // 🔧 Força a API a ouvir em http://localhost:8080
+            // Força a API a ouvir em http://localhost:8080
             //app.Urls.Add("http://localhost:8080");
             app.Urls.Add("http://0.0.0.0:8080");
 
 
-            // ✅ Ativa Swagger e Swagger UI
+            // Ativa Swagger e Swagger UI
 
             app.UseSwagger();
                 app.UseSwaggerUI();
             
 
-            // ✅ Ativa CORS
+            // Ativa CORS
             app.UseCors("CorsPolicy");
 
-            // ✅ Roteamento e controladores
-            app.UseAuthentication();  // <--- ADICIONAR ESTA LINHA
+            // Roteamento e controladores
+            app.UseAuthentication();  
             app.UseAuthorization();
             app.MapControllers();
 

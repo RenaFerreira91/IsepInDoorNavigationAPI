@@ -17,14 +17,18 @@ namespace InDoorMappingAPI.Repos
 
         public async Task<List<Usuario>> GetAllAsync()
         {
-            return await _context.Usuarios.Include(u => u.Mobilidade).ToListAsync();
+            return await _context.Usuarios
+                .Include(u => u.Mobilidade)
+                .Include(u => u.TipoUsuario)
+                .ToListAsync();
         }
 
         public async Task<Usuario> GetByIdAsync(long id)
         {
             return await _context.Usuarios
-         .Include(u => u.Mobilidade) // <-- garantir que carrega a FK
-         .FirstOrDefaultAsync(u => u.UsuarioId == id);
+               .Include(u => u.Mobilidade)
+               .Include(u => u.TipoUsuario)
+               .FirstOrDefaultAsync(u => u.UsuarioId == id);
         }
 
         public async Task AddAsync(Usuario usuario)

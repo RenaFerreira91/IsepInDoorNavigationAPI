@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using InDoorMappingAPI.Models;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using InDoorMappingAPI.Services.Interfaces;
 using InDoorMappingAPI.DTOs.GETs;
-using InDoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.DTOs.PUTs;
 
 namespace InDoorMappingAPI.Controllers
 {
@@ -22,16 +20,15 @@ namespace InDoorMappingAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GetUsuarioDTO>> GetAll()
+        public async Task<ActionResult<List<GetUsuarioDTO>>> GetAll()
         {
             try
             {
-                var users = await _usuarioService.GetAllAsync();
-                return Ok(users);
+                var usersDto = await _usuarioService.GetAllAsync();
+                return Ok(usersDto);
             }
             catch (Exception ex)
             {
-                // Log básico em consola
                 Console.WriteLine($"Erro em GetAll: {ex.Message}");
                 return StatusCode(500, "Erro interno ao obter os usuários.");
             }
@@ -40,10 +37,10 @@ namespace InDoorMappingAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GetUsuarioDTO>> GetById(long id)
         {
-            var usuario = await _usuarioService.GetByIdAsync(id);
-            if (usuario == null)
+            var usuarioDto = await _usuarioService.GetByIdAsync(id);
+            if (usuarioDto == null)
                 return NotFound();
-            return Ok(_mapper.Map<GetUsuarioDTO>(usuario));
+            return Ok(usuarioDto);
         }
 
         //[HttpGet("NovoUsuario")]
@@ -58,28 +55,44 @@ namespace InDoorMappingAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(long id, PutUsuarioDTO dto)
         {
-            if (id.ToString() != dto.UsuarioId)
+            if (id != dto.UsuarioId)
                 return BadRequest("ID inconsistente.");
 
-            var existing = await _usuarioService.GetByIdAsync(id);
-            if (existing == null)
-                return NotFound();
-
-            _mapper.Map(dto, existing); // Atualiza apenas os campos do DTO
-            await _usuarioService.UpdateAsync(existing);
-            return NoContent();
+            try
+            {
+                await _usuarioService.UpdateAsync(dto);
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro em Update: {ex.Message}");
+                return StatusCode(500, "Erro interno ao atualizar o usuário.");
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(long id)
         {
-            var existing = await _usuarioService.GetByIdAsync(id);
-            if (existing == null)
-                return NotFound();
-
-            await _usuarioService.DeleteAsync(id);
-            return NoContent();
+            try
+            {
+                await _usuarioService.DeleteAsync(id);
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro em Delete: {ex.Message}");
+                return StatusCode(500, "Erro interno ao deletar o usuário.");
+            }
         }
+
     }
 }
 

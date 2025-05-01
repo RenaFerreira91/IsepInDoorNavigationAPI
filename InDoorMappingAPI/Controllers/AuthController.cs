@@ -84,7 +84,9 @@ namespace InDoorMappingAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(PostLoginDTO dto)
         {
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == dto.Email);
+            var usuario = await _context.Usuarios
+                .Include(u => u.TipoUsuario)
+                .FirstOrDefaultAsync(u => u.Email == dto.Email);
 
             var hasher = new PasswordHasher<Usuario>();
             var result = hasher.VerifyHashedPassword(usuario, usuario.PasswordHash, dto.Password);
