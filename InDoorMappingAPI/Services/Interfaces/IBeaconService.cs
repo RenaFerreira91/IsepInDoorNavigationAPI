@@ -1,11 +1,15 @@
-﻿using InDoorMappingAPI.Models;
+﻿using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.DTOs.PUTs;
 
-public interface IBeaconService
+namespace InDoorMappingAPI.Services.Interfaces
 {
-    Task<IEnumerable<Beacon>> GetFilteredAsync(string? nome, double? lat, double? lng);
-    Task AddAsync(Beacon entity);
-    Task DeleteAsync(long id);
-    Task<List<Beacon>> GetAllAsync();
-    Task<Beacon> GetByIdAsync(long id);
-    Task UpdateAsync(Beacon entity);
+    public interface IBeaconService
+    {
+        Task<List<GetBeaconDTO>> GetAllAsync();
+        Task<GetBeaconDTO> GetByIdAsync(long id);
+        Task AddAsync(PostBeaconDTO dto);
+        Task UpdateAsync(PutBeaconDTO dto);
+        Task DeleteAsync(long id);
+    }
 }

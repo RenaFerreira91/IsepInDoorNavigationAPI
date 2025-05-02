@@ -7,8 +7,8 @@ namespace InDoorMappingAPI.Models
     public class Beacon
     {
         [Key]
-        [Column("beaconid")]
-        public long BeaconId { get; set; }
+        [Column("id")]
+        public long Id { get; set; }
 
         [Required]
         [Column("nome")]

@@ -1,10 +1,13 @@
 ﻿using InDoorMappingAPI.Models;
 
-public interface IBeaconRepo
+namespace InDoorMappingAPI.Repos.Interfaces
 {
-    Task AddAsync(Beacon entity);
-    Task DeleteAsync(long id);
-    Task<List<Beacon>> GetAllAsync();
-    Task<Beacon> GetByIdAsync(long id);
-    Task UpdateAsync(Beacon entity);
+    public interface IBeaconRepo
+    {
+        Task<List<Beacon>> GetAllAsync();
+        Task<Beacon> GetByIdAsync(long id);
+        Task AddAsync(Beacon beacon);
+        Task UpdateAsync(Beacon beacon);
+        Task DeleteAsync(long id);
+    }
 }

@@ -1,45 +1,49 @@
 ﻿using InDoorMappingAPI.Data;
 using InDoorMappingAPI.Models;
+using InDoorMappingAPI.Repos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-public class BeaconRepo : IBeaconRepo
+namespace InDoorMappingAPI.Repos
 {
-    private readonly DataContext _context;
-
-    public BeaconRepo(DataContext context)
+    public class BeaconRepo : IBeaconRepo
     {
-        _context = context;
-    }
+        private readonly DataContext _context;
 
-    public async Task<List<Beacon>> GetAllAsync()
-    {
-        return await _context.Beacons.ToListAsync();
-    }
-
-    public async Task<Beacon> GetByIdAsync(long id)
-    {
-        return await _context.Beacons.FirstOrDefaultAsync(e => e.BeaconId == id);
-    }
-
-    public async Task AddAsync(Beacon entity)
-    {
-        await _context.Beacons.AddAsync(entity);
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task UpdateAsync(Beacon entity)
-    {
-        _context.Beacons.Update(entity);
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task DeleteAsync(long id)
-    {
-        var entity = await _context.Beacons.FindAsync(id);
-        if (entity != null)
+        public BeaconRepo(DataContext context)
         {
-            _context.Beacons.Remove(entity);
+            _context = context;
+        }
+
+        public async Task<List<Beacon>> GetAllAsync()
+        {
+            return await _context.Beacons.ToListAsync();
+        }
+
+        public async Task<Beacon> GetByIdAsync(long id)
+        {
+            return await _context.Beacons.FindAsync(id);
+        }
+
+        public async Task AddAsync(Beacon beacon)
+        {
+            await _context.Beacons.AddAsync(beacon);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(Beacon beacon)
+        {
+            _context.Beacons.Update(beacon);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(long id)
+        {
+            var beacon = await _context.Beacons.FindAsync(id);
+            if (beacon != null)
+            {
+                _context.Beacons.Remove(beacon);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

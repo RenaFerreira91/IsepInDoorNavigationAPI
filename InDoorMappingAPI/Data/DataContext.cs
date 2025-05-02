@@ -7,7 +7,7 @@ namespace InDoorMappingAPI.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        public DbSet<Acessibilidade> Acessibilidade { get; set; }
+        public DbSet<Acessibilidade> Acessibilidades { get; set; }
         public DbSet<Beacon> Beacons { get; set; }
         public DbSet<Caminho> Caminhos { get; set; }
         public DbSet<Log> Logs { get; set; }

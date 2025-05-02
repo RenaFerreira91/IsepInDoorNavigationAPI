@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using InDoorMappingAPI.Data;
 using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.DTOs.PUTs.InDoorMappingAPI.DTOs.PUTs;
 using InDoorMappingAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,9 +23,9 @@ namespace InDoorMappingAPI
             _mapper = mapper;
         }
 
-        public async Task<List<GetCaminhoDTO>> ObterCaminhos(int origemId, int destinoId, bool apenasAcessiveis = false)
+        public async Task<List<GetCaminhoDTO>> GetCaminho(int origemId, int destinoId, bool apenasAcessiveis = false)
         {
-            var caminhos = await _repo.ObterCaminhos(origemId, destinoId);
+            var caminhos = await _repo.GetCaminhoBidirectional(origemId, destinoId);
 
             if (apenasAcessiveis)
                 caminhos = caminhos.Where(c => c.Acessivel).ToList();
@@ -33,7 +35,7 @@ namespace InDoorMappingAPI
 
         public async Task<GetMelhorCaminhoDTO> ObterMelhorCaminhoAsync(long destinoId, List<long> infraestruturasBloqueadas)
         {
-            var caminhos = await _repo.ObterTodosCaminhosAcessiveisAsync();
+            var caminhos = await _repo.GetAllAsync();
 
 
             var grafo = new Dictionary<long, List<(long destino, double distancia)>>();
@@ -106,6 +108,40 @@ namespace InDoorMappingAPI
             }
 
             return null;
+        }
+        public async Task<List<GetCaminhoDTO>> GetAllAsync()
+        {
+            var caminhos = await _repo.GetAllAsync();
+            return _mapper.Map<List<GetCaminhoDTO>>(caminhos);
+        }
+
+        public async Task<GetCaminhoDTO> GetByIdAsync(long id)
+        {
+            var caminho = await _repo.GetByIdAsync(id);
+            return _mapper.Map<GetCaminhoDTO>(caminho);
+        }
+
+        public async Task AddAsync(PostCaminhoDTO dto)
+        {
+            var caminho = _mapper.Map<Caminho>(dto);
+            await _repo.AddAsync(caminho);
+        }
+
+        public async Task UpdateAsync(PutCaminhoDTO dto)
+        {
+            var existing = await _repo.GetByIdAsync(dto.Id);
+            if (existing == null) throw new InvalidOperationException("Caminho não encontrado.");
+
+            _mapper.Map(dto, existing);
+            await _repo.UpdateAsync(existing);
+        }
+
+        public async Task DeleteAsync(long id)
+        {
+            var existing = await _repo.GetByIdAsync(id);
+            if (existing == null) throw new InvalidOperationException("Caminho não encontrado.");
+
+            await _repo.DeleteAsync(id);
         }
     }
 

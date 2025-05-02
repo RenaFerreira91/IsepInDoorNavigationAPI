@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using InDoorMappingAPI.Services.Interfaces;
 using InDoorMappingAPI.DTOs.GETs;
 using InDoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.DTOs.PUTs;
 
 namespace InDoorMappingAPI.Controllers.Public
 {
@@ -27,12 +28,49 @@ namespace InDoorMappingAPI.Controllers.Public
             return Ok(result);
         }
 
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _service.GetAllAsync();
+            return Ok(result);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var dto = await _service.GetByIdAsync(id);
             if (dto == null) return NotFound();
             return Ok(dto);
+        }
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(int id, PutInfraestruturaDTO dto)
+        {
+            if (id != dto.Id)
+                return BadRequest("ID inconsistente.");
+
+            try
+            {
+                await _service.UpdateAsync(dto);
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                await _service.DeleteAsync(id);
+                return NoContent();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

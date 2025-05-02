@@ -1,7 +1,8 @@
-﻿namespace InDoorMappingAPI.DTOs.POSTs
+﻿namespace InDoorMappingAPI.DTOs.PUTs
 {
-    public class PostBeaconDTO
+    public class PutBeaconDTO
     {
+        public long Id { get; set; }
         public string Nome { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }

@@ -1,54 +1,54 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using InDoorMappingAPI.DTOs.GETs;
+﻿using InDoorMappingAPI.DTOs.GETs;
 using InDoorMappingAPI.DTOs.POSTs;
 using InDoorMappingAPI.DTOs.PUTs;
 using InDoorMappingAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace InDoorMappingAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BeaconsController : ControllerBase
+    public class AcessibilidadeController : ControllerBase
     {
-        private readonly IBeaconService _beaconService;
+        private readonly IAcessibilidadeService _service;
 
-        public BeaconsController(IBeaconService beaconService)
+        public AcessibilidadeController(IAcessibilidadeService service)
         {
-            _beaconService = beaconService;
+            _service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GetBeaconDTO>>> GetAll()
+        public async Task<ActionResult<List<GetAcessibilidadeDTO>>> GetAll()
         {
-            var beacons = await _beaconService.GetAllAsync();
-            return Ok(beacons);
+            var items = await _service.GetAllAsync();
+            return Ok(items);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetBeaconDTO>> GetById(long id)
+        public async Task<ActionResult<GetAcessibilidadeDTO>> GetById(long id)
         {
-            var beacon = await _beaconService.GetByIdAsync(id);
-            if (beacon == null)
+            var item = await _service.GetByIdAsync(id);
+            if (item == null)
                 return NotFound();
-            return Ok(beacon);
+            return Ok(item);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(PostBeaconDTO dto)
+        public async Task<ActionResult> Create(PostAcessibilidadeDTO dto)
         {
-            await _beaconService.AddAsync(dto);
+            await _service.AddAsync(dto);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(long id, PutBeaconDTO dto)
+        public async Task<ActionResult> Update(long id, PutAcessibilidadeDTO dto)
         {
             if (id != dto.Id)
                 return BadRequest("ID inconsistente.");
 
             try
             {
-                await _beaconService.UpdateAsync(dto);
+                await _service.UpdateAsync(dto);
                 return NoContent();
             }
             catch (InvalidOperationException ex)
@@ -62,7 +62,7 @@ namespace InDoorMappingAPI.Controllers
         {
             try
             {
-                await _beaconService.DeleteAsync(id);
+                await _service.DeleteAsync(id);
                 return NoContent();
             }
             catch (InvalidOperationException ex)
@@ -71,4 +71,5 @@ namespace InDoorMappingAPI.Controllers
             }
         }
     }
+
 }

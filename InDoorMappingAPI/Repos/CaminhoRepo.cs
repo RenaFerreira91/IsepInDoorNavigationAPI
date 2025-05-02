@@ -1,8 +1,5 @@
 ﻿using InDoorMappingAPI.Data;
-using InDoorMappingAPI.Models;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using InDoorMappingAPI.DTOs.GETs;
 
 public class CaminhoRepo : ICaminhoRepo
 {
@@ -13,7 +10,7 @@ public class CaminhoRepo : ICaminhoRepo
         _context = context;
     }
 
-    public async Task<List<Caminho>> ObterCaminhos(int origemId, int destinoId)
+    public async Task<List<Caminho>> GetCaminhoBidirectional(int origemId, int destinoId)
     {
         return await _context.Caminhos
             .Where(c =>
@@ -23,11 +20,41 @@ public class CaminhoRepo : ICaminhoRepo
             .ToListAsync();
     }
 
-    public async Task<List<Caminho>> ObterTodosCaminhosAcessiveisAsync()
+    public async Task<List<Caminho>> GetAllAsync()
     {
-        var result = await _context.Caminhos
-            //.Where(c => c.Acessivel)
+        return await _context.Caminhos
+            .Include(c => c.Acessibilidade)
             .ToListAsync();
-        return result;
     }
+
+    public async Task<Caminho> GetByIdAsync(long id)
+    {
+        return await _context.Caminhos
+            .Include(c => c.Acessibilidade)
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+    }
+
+    public async Task AddAsync(Caminho caminho)
+    {
+        await _context.Caminhos.AddAsync(caminho);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task UpdateAsync(Caminho caminho)
+    {
+        _context.Caminhos.Update(caminho);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(long id)
+    {
+        var caminho = await _context.Caminhos.FindAsync(id);
+        if (caminho != null)
+        {
+            _context.Caminhos.Remove(caminho);
+            await _context.SaveChangesAsync();
+        }
+    }
+
 }

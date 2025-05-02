@@ -32,5 +32,20 @@ namespace InDoorMappingAPI.Repos
             await _context.Infraestruturas.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateAsync(Infraestrutura entity)
+        {
+            _context.Infraestruturas.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var entity = await _context.Infraestruturas.FindAsync(id);
+            if (entity != null)
+            {
+                _context.Infraestruturas.Remove(entity);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

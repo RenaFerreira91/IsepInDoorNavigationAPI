@@ -1,37 +1,57 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.DTOs.PUTs;
 using InDoorMappingAPI.Models;
+using InDoorMappingAPI.Repos.Interfaces;
+using InDoorMappingAPI.Services.Interfaces;
 
-public class BeaconService : IBeaconService
+namespace InDoorMappingAPI.Services
 {
-    private readonly IBeaconRepo _repo;
-
-    public BeaconService(IBeaconRepo repository)
+    public class BeaconService : IBeaconService
     {
-        _repo = repository;
+        private readonly IBeaconRepo _repo;
+        private readonly IMapper _mapper;
+
+        public BeaconService(IBeaconRepo repo, IMapper mapper)
+        {
+            _repo = repo;
+            _mapper = mapper;
+        }
+
+        public async Task<List<GetBeaconDTO>> GetAllAsync()
+        {
+            var beacons = await _repo.GetAllAsync();
+            return _mapper.Map<List<GetBeaconDTO>>(beacons);
+        }
+
+        public async Task<GetBeaconDTO> GetByIdAsync(long id)
+        {
+            var beacon = await _repo.GetByIdAsync(id);
+            return _mapper.Map<GetBeaconDTO>(beacon);
+        }
+
+        public async Task AddAsync(PostBeaconDTO dto)
+        {
+            var beacon = _mapper.Map<Beacon>(dto);
+            await _repo.AddAsync(beacon);
+        }
+
+        public async Task UpdateAsync(PutBeaconDTO dto)
+        {
+            var existing = await _repo.GetByIdAsync(dto.Id);
+            if (existing == null) throw new InvalidOperationException("Beacon não encontrado.");
+
+            _mapper.Map(dto, existing);
+            await _repo.UpdateAsync(existing);
+        }
+
+        public async Task DeleteAsync(long id)
+        {
+            var existing = await _repo.GetByIdAsync(id);
+            if (existing == null) throw new InvalidOperationException("Beacon não encontrado.");
+
+            await _repo.DeleteAsync(id);
+        }
     }
-
-    public async Task<IEnumerable<Beacon>> GetFilteredAsync(string? nome, double? lat, double? lng)
-    {
-        var beacons = await _repo.GetAllAsync();
-        var filtered = beacons.AsQueryable();
-
-        if (!string.IsNullOrWhiteSpace(nome))
-            filtered = filtered.Where(b => b.Nome.ToLower().Contains(nome.ToLower()));
-
-        if (lat.HasValue && lng.HasValue)
-            filtered = filtered.Where(b => b.Latitude != 0 && b.Longitude != 0);
-
-        return filtered;
-    }
-
-    public async Task<List<Beacon>> GetAllAsync() => await _repo.GetAllAsync();
-
-    public async Task<Beacon> GetByIdAsync(long id) => await _repo.GetByIdAsync(id);
-
-    public async Task AddAsync(Beacon entity) => await _repo.AddAsync(entity);
-
-    public async Task UpdateAsync(Beacon entity) => await _repo.UpdateAsync(entity);
-
-    public async Task DeleteAsync(long id) => await _repo.DeleteAsync(id);
 }

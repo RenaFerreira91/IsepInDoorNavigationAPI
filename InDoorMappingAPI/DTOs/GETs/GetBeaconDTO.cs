@@ -2,8 +2,10 @@
 {
     public class GetBeaconDTO
     {
-        public long BeaconId { get; set; }
-        // adicionar outras propriedades conforme o modelo
+        public long Id { get; set; }
+        public string Nome { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string Localizacao { get; set; }
     }
-
 }

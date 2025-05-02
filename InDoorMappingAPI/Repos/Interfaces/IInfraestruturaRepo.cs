@@ -7,5 +7,7 @@ namespace InDoorMappingAPI.Repos.Interfaces
         Task AddAsync(Infraestrutura entity);
         Task<IEnumerable<Infraestrutura>> GetAllAsync();
         Task<Infraestrutura> GetByIdAsync(int id);
+        Task UpdateAsync(Infraestrutura entity);
+        Task DeleteAsync(int id);
     }
 }
