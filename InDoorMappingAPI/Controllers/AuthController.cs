@@ -6,6 +6,7 @@ using InDoorMappingAPI.Models;
 using InDoorMappingAPI.Services;
 using Microsoft.AspNetCore.Identity;
 using InDoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.Services.Interfaces;
 
 namespace InDoorMappingAPI.Controllers
 {
@@ -15,12 +16,16 @@ namespace InDoorMappingAPI.Controllers
     {
         private readonly DataContext _context;
         private readonly JwtService _jwtService;
+        private readonly IRecoveryService _recService;
+        private readonly EmailService _emailService;
         private readonly IMapper _mapper;
 
-        public AuthController(DataContext context, JwtService jwtService, IMapper mapper)
+        public AuthController(DataContext context, JwtService jwtService, IRecoveryService recService, EmailService emailService, IMapper mapper)
         {
             _context = context;
             _jwtService = jwtService;
+            _recService = recService;
+            _emailService = emailService;
             _mapper = mapper;
         }
 
@@ -96,6 +101,48 @@ namespace InDoorMappingAPI.Controllers
             
             var token = _jwtService.GenerateToken(usuario);
             return Ok(new { token });
+        }
+        [HttpPost("recover")]
+        public async Task<IActionResult> RecoverAccount([FromBody] PostRecoverAccountDTO dto)
+        {
+            var user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == dto.Email);
+            if (user == null)
+                return NotFound("User with this email does not exist.");
+
+            var token = await _recService.GenerateRecoveryToken(user.UsuarioId);
+
+            await _emailService.SendRecoveryTokenEmail(user.Email, token);
+
+            return Ok("Recovery token has been sent to your email.");
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] PostResetPasswordDTO dto)
+        {
+            var recoveryToken = await _recService.GetValidToken(dto.Token);
+            if (recoveryToken == null)
+                return BadRequest("Invalid or expired recovery token.");
+
+            var user = await _context.Usuarios.FindAsync(recoveryToken.UserId);
+            if (user == null)
+                return NotFound("User not found.");
+
+            var hasher = new PasswordHasher<Usuario>();
+            user.PasswordHash = hasher.HashPassword(user, dto.NewPassword);
+
+            await _context.SaveChangesAsync();
+            await _recService.InvalidateToken(recoveryToken);
+
+            return Ok("Password has been reset successfully.");
+        }
+        [HttpGet("validate-token")]
+        public async Task<IActionResult> ValidateToken([FromQuery] string token)
+        {
+            var recoveryToken = await _recService.GetValidToken(token);
+            if (recoveryToken == null)
+                return BadRequest("Invalid or expired recovery token.");
+
+            return Ok("Token is valid.");
         }
     }
 }

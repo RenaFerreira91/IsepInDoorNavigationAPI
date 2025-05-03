@@ -18,6 +18,7 @@ namespace InDoorMappingAPI.Data
         public DbSet<Diario> Diario { get; set; }
         public DbSet<FeedbackCaminho> FeedbackCaminhos { get; set; }
         public DbSet<TipoUsuario> TiposUsuarios { get; set; } 
+        public DbSet<RecoveryToken> RecoveryTokens { get; set; } 
 
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

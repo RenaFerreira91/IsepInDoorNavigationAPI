@@ -41,6 +41,7 @@ namespace InDoorMappingAPI
             builder.Services.AddScoped<IDiarioRepo, DiarioRepo>();
             builder.Services.AddScoped<IFeedbackCaminhoRepo, FeedbackCaminhoRepo>();
             builder.Services.AddScoped<IAcessibilidadeRepo, AcessibilidadeRepo>();
+            builder.Services.AddScoped<IRecoveryTokenRepo, RecoveryTokenRepo>();
 
 
             // Adding Services
@@ -54,6 +55,10 @@ namespace InDoorMappingAPI
             builder.Services.AddScoped<IDiarioService, DiarioService>();
             builder.Services.AddScoped<IFeedbackCaminhoService, FeedbackCaminhoService>();
             builder.Services.AddScoped<IAcessibilidadeService, AcessibilidadeService>();
+            builder.Services.AddScoped<IRecoveryService, RecoveryService>();
+            builder.Services.AddScoped<EmailService>();
+
+
 
 
             builder.Services.AddScoped<JwtService>();
