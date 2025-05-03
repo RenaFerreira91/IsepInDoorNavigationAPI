@@ -34,6 +34,11 @@ namespace InDoorMappingAPI
             CreateMap<PostAcessibilidadeDTO, Acessibilidade>();
             CreateMap<PutAcessibilidadeDTO, Acessibilidade>();
 
+            CreateMap<Log, GetLogDTO>()
+                .ForMember(dest => dest.UsuarioId, opt => opt.MapFrom(src => src.Usuario.UsuarioId));
+
+            CreateMap<PostLogDTO, Log>();
+
         }
     }
 }

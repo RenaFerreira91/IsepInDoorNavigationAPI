@@ -1,13 +1,14 @@
-﻿using InDoorMappingAPI.Models;
+﻿using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.Models;
 
-public interface ILogService
+namespace InDoorMappingAPI.Services.Interfaces
 {
-
-    Task<IEnumerable<Log>> GetFilteredAsync(string? acao, string? usuarioNome);
-
-    Task AddAsync(Log entity);
-    Task DeleteAsync(long id);
-    Task<List<Log>> GetAllAsync();
-    Task<Log> GetByIdAsync(long id);
-    Task UpdateAsync(Log entity);
+    public interface ILogService
+    {
+        Task AddAsync(Log log);
+        Task DeleteAsync(long id);
+        Task<List<GetLogDTO>> GetAllAsync();
+        Task<GetLogDTO> GetByIdAsync(long id);
+        Task<List<GetLogDTO>> GetFilteredAsync(string? acao, string? usuarioNome);
+    }
 }

@@ -2,6 +2,7 @@
 {
     public class PostLogDTO
     {
-        // propriedades necessárias para criação
+        public long? UsuarioId { get; set; }
+        public string Acao { get; set; }
     }
 }

@@ -2,8 +2,9 @@
 {
     public class GetLogDTO
     {
-        public long LogId { get; set; }
-        public object UsuarioNome { get; internal set; }
-        // adicionar outras propriedades conforme o modelo
+        public long Id { get; set; }
+        public long? UsuarioId { get; set; }
+        public string Acao { get; set; }
+        public DateTime DataHora { get; set; }
     }
 }

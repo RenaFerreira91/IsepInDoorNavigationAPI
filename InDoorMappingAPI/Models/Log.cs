@@ -7,7 +7,7 @@ namespace InDoorMappingAPI.Models
     public class Log
     {
         [Key]
-        [Column("logid")]
+        [Column("id")]
         public long LogId { get; set; }
 
         [Column("usuarioid")]

@@ -2,35 +2,53 @@
 using InDoorMappingAPI.DTOs.GETs;
 using InDoorMappingAPI.DTOs.POSTs;
 using InDoorMappingAPI.Models;
+using InDoorMappingAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/admin/[controller]")]
+[Route("api/[controller]")]
 public class LogsController : ControllerBase
 {
     private readonly ILogService _service;
-    private readonly IMapper _mapper;
 
-    public LogsController(ILogService service, IMapper mapper)
+    public LogsController(ILogService service)
     {
         _service = service;
-        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<GetLogDTO>>> GetAll()
+    public async Task<ActionResult<List<GetLogDTO>>> GetAll()
     {
-        var list = await _service.GetAllAsync();
-        return Ok(_mapper.Map<IEnumerable<GetLogDTO>>(list));
+        var logs = await _service.GetAllAsync();
+        return Ok(logs);
     }
 
-    [Authorize(Roles = "Admin,Editor")]
-    [HttpPost]
-    public async Task<IActionResult> Create(PostLogDTO dto)
+    [HttpGet("filter")]
+    public async Task<ActionResult<List<GetLogDTO>>> GetFiltered([FromQuery] string? acao, [FromQuery] string? usuarioNome)
     {
-        var entity = _mapper.Map<Log>(dto);
-        await _service.AddAsync(entity);
-        return Created("", _mapper.Map<GetLogDTO>(entity));
+        var logs = await _service.GetFilteredAsync(acao, usuarioNome);
+        return Ok(logs);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Create(PostLogDTO dto)
+    {
+        var log = new Log
+        {
+            UsuarioId = dto.UsuarioId,
+            Acao = dto.Acao,
+            DataHora = DateTime.UtcNow
+        };
+
+        await _service.AddAsync(log);
+        return Ok();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(long id)
+    {
+        await _service.DeleteAsync(id);
+        return NoContent();
     }
 }

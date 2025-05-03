@@ -2,9 +2,9 @@
 
 public interface ILogRepo
 {
-    Task AddAsync(Log entity);
+    Task AddAsync(Log log);
     Task DeleteAsync(long id);
     Task<List<Log>> GetAllAsync();
     Task<Log> GetByIdAsync(long id);
-    Task UpdateAsync(Log entity);
+    Task<List<Log>> GetFilteredAsync(string? acao, string? usuarioNome);
 }
