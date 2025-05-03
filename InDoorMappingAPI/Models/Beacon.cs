@@ -23,5 +23,8 @@ namespace InDoorMappingAPI.Models
         [Required]
         [Column("localizacao")]
         public string Localizacao { get; set; }
+
+        [Column("piso")]
+        public int Piso { get; set; }
     }
 }

@@ -6,5 +6,6 @@
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string Localizacao { get; set; }
+        public int Piso { get; set; }
     }
 }
