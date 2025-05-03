@@ -11,37 +11,47 @@ namespace InDoorMappingAPI.Controllers.Public
     [AllowAnonymous]
     [ApiController]
     [Route("api/public/[controller]")]
-    public class FeedbackCaminhoController : ControllerBase
+    public class FeedbackCaminhosController : ControllerBase
     {
         private readonly IFeedbackCaminhoService _service;
-        private readonly IMapper _mapper;
 
-        public FeedbackCaminhoController(IFeedbackCaminhoService service, IMapper mapper)
+        public FeedbackCaminhosController(IFeedbackCaminhoService service)
         {
             _service = service;
-            _mapper = mapper;
-        }
-
-        [HttpPost("GiveFeedback")]
-        public async Task<IActionResult> GiveFeedback(PostFeedbackCaminhoDTO dto)
-        {
-            var feedback = _mapper.Map<FeedbackCaminho>(dto);
-            await _service.AddAsync(feedback);
-            return Ok();
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] long? caminhoId)
+        public async Task<ActionResult<List<GetFeedbackCaminhoDTO>>> GetAll()
         {
-            var lista = await _service.GetAllAsync(caminhoId);
-            return Ok(_mapper.Map<IEnumerable<GetFeedbackCaminhoDTO>>(lista));
+            var feedbacks = await _service.GetAllAsync();
+            return Ok(feedbacks);
         }
 
-        [HttpGet("media/caminho/{id}")]
-        public async Task<IActionResult> GetMedia(long id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GetFeedbackCaminhoDTO>> GetById(long id)
         {
-            var media = await _service.GetMediaPorCaminhoAsync(id);
-            return media.HasValue ? Ok(media) : NotFound("Sem feedback para esse caminho.");
+            var feedback = await _service.GetByIdAsync(id);
+            if (feedback == null)
+                return NotFound();
+
+            return Ok(feedback);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(PostFeedbackCaminhoDTO dto)
+        {
+            if (dto.Avaliacao < 1 || dto.Avaliacao > 5)
+                return BadRequest("Avaliacao must be between 1 and 5.");
+
+            await _service.AddAsync(dto);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(long id)
+        {
+            await _service.DeleteAsync(id);
+            return NoContent();
         }
     }
 }

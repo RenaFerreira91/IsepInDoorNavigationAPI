@@ -17,4 +17,5 @@ public interface ICaminhoService
     Task AddAsync(PostCaminhoDTO dto);
     Task UpdateAsync(PutCaminhoDTO dto);
     Task DeleteAsync(long id);
+    Task<List<GetCaminhoDetalhadoDTO>> GetAllWithDetailsAsync();
 }

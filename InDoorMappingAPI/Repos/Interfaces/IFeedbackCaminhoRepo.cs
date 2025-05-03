@@ -5,7 +5,8 @@ namespace InDoorMappingAPI.Repos.Interfaces
     public interface IFeedbackCaminhoRepo
     {
         Task AddAsync(FeedbackCaminho feedback);
-        Task<IEnumerable<FeedbackCaminho>> GetAllAsync();
-        Task<double?> GetMediaPorCaminhoAsync(long caminhoId);
+        Task DeleteAsync(long id);
+        Task<List<FeedbackCaminho>> GetAllAsync();
+        Task<FeedbackCaminho?> GetByIdAsync(long id);
     }
 }

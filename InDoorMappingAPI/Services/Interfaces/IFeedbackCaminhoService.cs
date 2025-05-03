@@ -1,11 +1,13 @@
-﻿using InDoorMappingAPI.Models;
+﻿using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.DTOs.POSTs;
 
 namespace InDoorMappingAPI.Services.Interfaces
 {
     public interface IFeedbackCaminhoService
     {
-        Task AddAsync(FeedbackCaminho feedback);
-        Task<IEnumerable<FeedbackCaminho>> GetAllAsync(long? caminhoId = null);
-        Task<double?> GetMediaPorCaminhoAsync(long caminhoId);
+        Task AddAsync(PostFeedbackCaminhoDTO dto);
+        Task DeleteAsync(long id);
+        Task<List<GetFeedbackCaminhoDTO>> GetAllAsync();
+        Task<GetFeedbackCaminhoDTO?> GetByIdAsync(long id);
     }
 }

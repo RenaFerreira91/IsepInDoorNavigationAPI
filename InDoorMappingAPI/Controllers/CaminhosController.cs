@@ -85,4 +85,10 @@ public class CaminhosController : ControllerBase
             return NotFound(ex.Message);
         }
     }
+    [HttpGet("detailed")]
+    public async Task<ActionResult<List<GetCaminhoDetalhadoDTO>>> GetAllDetailed()
+    {
+        var caminhos = await _service.GetAllWithDetailsAsync();
+        return Ok(caminhos);
+    }
 }

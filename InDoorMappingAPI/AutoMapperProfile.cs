@@ -16,6 +16,14 @@ namespace InDoorMappingAPI
                     opt.MapFrom(src => src.Acessibilidade != null ? src.Acessibilidade.Tipo : "Desconhecido"));
             CreateMap<PostCaminhoDTO, Caminho>();
             CreateMap<PutCaminhoDTO, Caminho>();
+            CreateMap<Caminho, GetCaminhoDetalhadoDTO>()
+                .ForMember(dest => dest.OrigemDescricao, opt => opt.MapFrom(src => src.Origem.Descricao))
+                .ForMember(dest => dest.OrigemPiso, opt => opt.MapFrom(src => src.Origem.Piso))
+                .ForMember(dest => dest.OrigemTipoInfraestrutura, opt => opt.MapFrom(src =>             src.Origem.TipoInfraestrutura.Tipo))
+                .ForMember(dest => dest.DestinoDescricao, opt => opt.MapFrom(src => src.Destino.Descricao))
+                .ForMember(dest => dest.DestinoPiso, opt => opt.MapFrom(src => src.Destino.Piso))
+                .ForMember(dest => dest.DestinoTipoInfraestrutura, opt => opt.MapFrom(src =>            src.Destino.TipoInfraestrutura.Tipo))
+                .ForMember(dest => dest.TipoAcessibilidade, opt => opt.MapFrom(src => src.Acessibilidade.Tipo));
 
             CreateMap<Infraestrutura, GetInfraestruturaDTO>()
                 .ForMember(dest => dest.TipoInfraestrutura, opt => opt.MapFrom(src => src.TipoInfraestrutura.Tipo));
@@ -38,6 +46,9 @@ namespace InDoorMappingAPI
                 .ForMember(dest => dest.UsuarioId, opt => opt.MapFrom(src => src.Usuario.UsuarioId));
 
             CreateMap<PostLogDTO, Log>();
+
+            CreateMap<FeedbackCaminho, GetFeedbackCaminhoDTO>();
+            CreateMap<PostFeedbackCaminhoDTO, FeedbackCaminho>();
 
         }
     }

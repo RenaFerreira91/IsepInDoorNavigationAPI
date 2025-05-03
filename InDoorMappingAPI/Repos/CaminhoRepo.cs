@@ -1,4 +1,5 @@
 ﻿using InDoorMappingAPI.Data;
+using InDoorMappingAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 public class CaminhoRepo : ICaminhoRepo
@@ -55,6 +56,14 @@ public class CaminhoRepo : ICaminhoRepo
             _context.Caminhos.Remove(caminho);
             await _context.SaveChangesAsync();
         }
+    }
+    public async Task<List<Caminho>> GetAllWithDetailsAsync()
+    {
+        return await _context.Caminhos
+            .Include(c => c.Acessibilidade)
+            .Include(c => c.Origem).ThenInclude(i => i.TipoInfraestrutura)
+            .Include(c => c.Destino).ThenInclude(i => i.TipoInfraestrutura)
+            .ToListAsync();
     }
 
 }

@@ -14,22 +14,31 @@ namespace InDoorMappingAPI.Repos
             _context = context;
         }
 
-        public async Task<IEnumerable<FeedbackCaminho>> GetAllAsync()
-        {
-            return await _context.FeedbackCaminhos.Include(f => f.Usuario).ToListAsync();
-        }
-
         public async Task AddAsync(FeedbackCaminho feedback)
         {
             await _context.FeedbackCaminhos.AddAsync(feedback);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<double?> GetMediaPorCaminhoAsync(long caminhoId)
+        public async Task<List<FeedbackCaminho>> GetAllAsync()
         {
-            return await _context.FeedbackCaminhos
-                .Where(f => f.CaminhoId == caminhoId)
-                .AverageAsync(f => (double?)f.Avaliacao);
+            return await _context.FeedbackCaminhos.ToListAsync();
+        }
+
+        public async Task<FeedbackCaminho?> GetByIdAsync(long id)
+        {
+            return await _context.FeedbackCaminhos.FindAsync(id);
+        }
+
+        public async Task DeleteAsync(long id)
+        {
+            var feedback = await _context.FeedbackCaminhos.FindAsync(id);
+            if (feedback != null)
+            {
+                _context.FeedbackCaminhos.Remove(feedback);
+                await _context.SaveChangesAsync();
+            }
         }
     }
+
 }

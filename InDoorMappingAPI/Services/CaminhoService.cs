@@ -143,6 +143,12 @@ namespace InDoorMappingAPI
 
             await _repo.DeleteAsync(id);
         }
+
+        public async Task<List<GetCaminhoDetalhadoDTO>> GetAllWithDetailsAsync()
+        {
+            var caminhos = await _repo.GetAllWithDetailsAsync();
+            return _mapper.Map<List<GetCaminhoDetalhadoDTO>>(caminhos);
+        }
     }
 
 }

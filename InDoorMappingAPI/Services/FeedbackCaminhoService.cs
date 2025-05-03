@@ -1,5 +1,7 @@
-﻿using InDoorMappingAPI.Models;
-using InDoorMappingAPI.Repos;
+﻿using AutoMapper;
+using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.Models;
 using InDoorMappingAPI.Repos.Interfaces;
 using InDoorMappingAPI.Services.Interfaces;
 
@@ -8,28 +10,38 @@ namespace InDoorMappingAPI.Services
     public class FeedbackCaminhoService : IFeedbackCaminhoService
     {
         private readonly IFeedbackCaminhoRepo _repo;
+        private readonly IMapper _mapper;
 
-        public FeedbackCaminhoService(IFeedbackCaminhoRepo repo)
+        public FeedbackCaminhoService(IFeedbackCaminhoRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<FeedbackCaminho>> GetAllAsync(long? caminhoId = null)
+        public async Task AddAsync(PostFeedbackCaminhoDTO dto)
         {
-            var lista = await _repo.GetAllAsync();
-            return caminhoId.HasValue
-                ? lista.Where(f => f.CaminhoId == caminhoId)
-                : lista;
-        }
+            var feedback = _mapper.Map<FeedbackCaminho>(dto);
+            feedback.DataHora = DateTime.UtcNow;
 
-        public async Task AddAsync(FeedbackCaminho feedback)
-        {
             await _repo.AddAsync(feedback);
         }
 
-        public async Task<double?> GetMediaPorCaminhoAsync(long caminhoId)
+        public async Task<List<GetFeedbackCaminhoDTO>> GetAllAsync()
         {
-            return await _repo.GetMediaPorCaminhoAsync(caminhoId);
+            var feedbacks = await _repo.GetAllAsync();
+            return _mapper.Map<List<GetFeedbackCaminhoDTO>>(feedbacks);
+        }
+
+        public async Task<GetFeedbackCaminhoDTO?> GetByIdAsync(long id)
+        {
+            var feedback = await _repo.GetByIdAsync(id);
+            return feedback == null ? null : _mapper.Map<GetFeedbackCaminhoDTO>(feedback);
+        }
+
+        public async Task DeleteAsync(long id)
+        {
+            await _repo.DeleteAsync(id);
         }
     }
+
 }

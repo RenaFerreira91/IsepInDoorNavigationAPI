@@ -9,6 +9,5 @@ public interface ICaminhoRepo
     Task AddAsync(Caminho caminho);
     Task UpdateAsync(Caminho caminho);
     Task DeleteAsync(long id);
-
-
+    Task<List<Caminho>> GetAllWithDetailsAsync();
 }
