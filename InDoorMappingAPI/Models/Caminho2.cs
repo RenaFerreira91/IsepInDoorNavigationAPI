@@ -29,7 +29,7 @@ namespace InDoorMappingAPI.Models
 
         [Required]
         [Column("piso")]
-        public bool Piso { get; set; }
+        public int Piso { get; set; }
 
         [Column("lista_coordenadas")]
         public string ListaCoordenadas { get; set; }  // string (WKT, GeoJSON)
