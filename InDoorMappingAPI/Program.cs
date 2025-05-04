@@ -43,6 +43,7 @@ namespace InDoorMappingAPI
             builder.Services.AddScoped<IFeedbackCaminhoRepo, FeedbackCaminhoRepo>();
             builder.Services.AddScoped<IAcessibilidadeRepo, AcessibilidadeRepo>();
             builder.Services.AddScoped<IRecoveryTokenRepo, RecoveryTokenRepo>();
+            builder.Services.AddScoped<ILocalizacaoUsuarioRepo, LocalizacaoUsuarioRepo>();
 
 
             // Adding Services
@@ -58,6 +59,7 @@ namespace InDoorMappingAPI
             builder.Services.AddScoped<IFeedbackCaminhoService, FeedbackCaminhoService>();
             builder.Services.AddScoped<IAcessibilidadeService, AcessibilidadeService>();
             builder.Services.AddScoped<IRecoveryService, RecoveryService>();
+            builder.Services.AddScoped<ILocalizacaoUsuarioService, LocalizacaoUsuarioService>();
             builder.Services.AddScoped<EmailService>();
 
 

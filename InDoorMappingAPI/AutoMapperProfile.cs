@@ -54,6 +54,10 @@ namespace InDoorMappingAPI
             CreateMap<FeedbackCaminho, GetFeedbackCaminhoDTO>();
             CreateMap<PostFeedbackCaminhoDTO, FeedbackCaminho>();
 
+            CreateMap<LocalizacaoUsuario, GetLocalizacaoUsuarioDTO>();
+            CreateMap<PostLocalizacaoUsuarioDTO, LocalizacaoUsuario>();
+
+
         }
     }
 }
