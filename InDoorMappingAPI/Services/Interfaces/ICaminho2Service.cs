@@ -1,13 +1,15 @@
-﻿using InDoorMappingAPI.Models;
+﻿using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.DTOs.PUTs;
 
 namespace InDoorMappingAPI.Services.Interfaces
 {
     public interface ICaminho2Service
     {
-        Task AddAsync(Caminho2 caminho);
+        Task AddAsync(PostCaminho2DTO dto);
         Task DeleteAsync(long id);
-        Task<List<Caminho2>> GetAllAsync();
-        Task<Caminho2> GetByIdAsync(long id);
-        Task UpdateAsync(Caminho2 caminho);
+        Task<List<GetCaminho2DTO>> GetAllAsync();
+        Task<GetCaminho2DTO> GetByIdAsync(long id);
+        Task UpdateAsync(PutCaminho2DTO dto);
     }
 }

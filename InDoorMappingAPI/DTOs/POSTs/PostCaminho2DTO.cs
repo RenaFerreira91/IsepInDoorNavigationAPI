@@ -2,6 +2,7 @@
 {
     public class PostCaminho2DTO
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
         public long OrigemId { get; set; }
         public long DestinoId { get; set; }
