@@ -10,6 +10,7 @@ namespace InDoorMappingAPI.Data
         public DbSet<Acessibilidade> Acessibilidades { get; set; }
         public DbSet<Beacon> Beacons { get; set; }
         public DbSet<Caminho> Caminhos { get; set; }
+        public DbSet<Caminho2> Caminhos2 { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<Mobilidade> Mobilidades { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }

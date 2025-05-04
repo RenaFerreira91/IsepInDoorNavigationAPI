@@ -25,6 +25,10 @@ namespace InDoorMappingAPI
                 .ForMember(dest => dest.DestinoTipoInfraestrutura, opt => opt.MapFrom(src =>            src.Destino.TipoInfraestrutura.Tipo))
                 .ForMember(dest => dest.TipoAcessibilidade, opt => opt.MapFrom(src => src.Acessibilidade.Tipo));
 
+            CreateMap<Caminho2, GetCaminho2DTO>();
+            CreateMap<PostCaminho2DTO, Caminho2>();
+            CreateMap<PutCaminho2DTO, Caminho2>();
+
             CreateMap<Infraestrutura, GetInfraestruturaDTO>()
                 .ForMember(dest => dest.TipoInfraestrutura, opt => opt.MapFrom(src => src.TipoInfraestrutura.Tipo));
             CreateMap<PostInfraestruturaDTO, Infraestrutura>();
