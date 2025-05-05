@@ -35,9 +35,13 @@ namespace InDoorMappingAPI
             CreateMap<PutInfraestruturaDTO, Infraestrutura>()
                 .ForMember(dest => dest.TipoInfraestrutura, opt => opt.Ignore());
 
+            CreateMap<TipoInfraestrutura, GetTipoInfraestruturaDTO>();
+            CreateMap<PostTipoInfraestruturaDTO, TipoInfraestrutura>();
+            CreateMap<GetTipoInfraestruturaDTO, TipoInfraestrutura>();
+
             CreateMap<Usuario, GetUsuarioDTO>()
-            .ForMember(dest => dest.TipoUsuario, opt => opt.MapFrom(src => src.TipoUsuario.Tipo))
-            .ForMember(dest => dest.MobilidadeTipo, opt => opt.MapFrom(src => src.Mobilidade.Tipo));
+                .ForMember(dest => dest.TipoUsuario, opt => opt.MapFrom(src => src.TipoUsuario.Tipo))
+                .ForMember(dest => dest.MobilidadeTipo, opt => opt.MapFrom(src => src.Mobilidade.Tipo));
             
             CreateMap<Beacon, GetBeaconDTO>();
             CreateMap<PostBeaconDTO, Beacon>();

@@ -38,6 +38,7 @@ namespace InDoorMappingAPI
             builder.Services.AddScoped<ICaminhoRepo, CaminhoRepo>();
             builder.Services.AddScoped<ICaminho2Repo, Caminho2Repo>();
             builder.Services.AddScoped<IInfraestruturaRepo, InfraestruturaRepo>();
+            builder.Services.AddScoped<ITipoInfraestruturaRepo, TipoInfraestruturaRepo>();
             builder.Services.AddScoped<IComandoEpocRepo, ComandoEpocRepo>();
             builder.Services.AddScoped<IDiarioRepo, DiarioRepo>();
             builder.Services.AddScoped<IFeedbackCaminhoRepo, FeedbackCaminhoRepo>();
@@ -54,6 +55,7 @@ namespace InDoorMappingAPI
             builder.Services.AddScoped<ICaminhoService, CaminhoService>();
             builder.Services.AddScoped<ICaminho2Service, Caminho2Service>();
             builder.Services.AddScoped<IInfraestruturaService, InfraestruturaService>();
+            builder.Services.AddScoped<ITipoInfraestruturaService, TipoInfraestruturaService>();
             builder.Services.AddScoped<IComandoEpocService, ComandoEpocService>();
             builder.Services.AddScoped<IDiarioService, DiarioService>();
             builder.Services.AddScoped<IFeedbackCaminhoService, FeedbackCaminhoService>();

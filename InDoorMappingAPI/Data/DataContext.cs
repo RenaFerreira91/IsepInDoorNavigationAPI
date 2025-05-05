@@ -15,6 +15,7 @@ namespace InDoorMappingAPI.Data
         public DbSet<Mobilidade> Mobilidades { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Infraestrutura> Infraestruturas { get; set; }
+        public DbSet<TipoInfraestrutura> TiposInfraestruturas { get; set; }
         public DbSet<ComandoEpoc> ComandosEpoc { get; set; }
         public DbSet<Diario> Diario { get; set; }
         public DbSet<FeedbackCaminho> FeedbackCaminhos { get; set; }
