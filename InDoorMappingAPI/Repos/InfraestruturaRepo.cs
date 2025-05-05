@@ -20,7 +20,7 @@ namespace InDoorMappingAPI.Repos
                 .ToListAsync();
         }
 
-        public async Task<Infraestrutura> GetByIdAsync(int id)
+        public async Task<Infraestrutura> GetByIdAsync(long id)
         {
             return await _context.Infraestruturas
                 .Include(i => i.TipoInfraestrutura)
@@ -34,11 +34,19 @@ namespace InDoorMappingAPI.Repos
         }
         public async Task UpdateAsync(Infraestrutura entity)
         {
-            _context.Infraestruturas.Update(entity);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Infraestruturas.Update(entity);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro no UpdateAsync: {ex.Message}");
+                throw;
+            }
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(long id)
         {
             var entity = await _context.Infraestruturas.FindAsync(id);
             if (entity != null)
