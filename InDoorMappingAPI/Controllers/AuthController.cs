@@ -7,6 +7,8 @@ using InDoorMappingAPI.Services;
 using Microsoft.AspNetCore.Identity;
 using InDoorMappingAPI.DTOs.POSTs;
 using InDoorMappingAPI.Services.Interfaces;
+using System.Text.RegularExpressions;
+using InDoorMappingAPI.Helpers;
 
 namespace InDoorMappingAPI.Controllers
 {
@@ -60,9 +62,15 @@ namespace InDoorMappingAPI.Controllers
         [HttpPost("register2")]
         public async Task<IActionResult> Register(PostRegisterDTO dto)
         {
-            if (await _context.Usuarios.AnyAsync(u => u.Email == dto.Email))
-                return BadRequest("Email já está em uso.");
+            if (!EmailValidator.IsValidIsepEmail(dto.Email))
+            {
+                return BadRequest("Invalid email. You must use your institutional ISEP email (7 digits + @isep.ipp.pt).");
+            }
 
+            if (await _context.Usuarios.AnyAsync(u => u.Email == dto.Email))
+            {
+                return BadRequest("Email already registered.");
+            }               
 
             var usuario = new Usuario
             {
@@ -89,6 +97,7 @@ namespace InDoorMappingAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(PostLoginDTO dto)
         {
+
             var usuario = await _context.Usuarios
                 .Include(u => u.TipoUsuario)
                 .FirstOrDefaultAsync(u => u.Email == dto.Email);

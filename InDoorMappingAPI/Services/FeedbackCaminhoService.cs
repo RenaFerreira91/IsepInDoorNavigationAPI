@@ -18,24 +18,23 @@ namespace InDoorMappingAPI.Services
             _mapper = mapper;
         }
 
-        public async Task AddAsync(PostFeedbackCaminhoDTO dto)
-        {
-            var feedback = _mapper.Map<FeedbackCaminho>(dto);
-            feedback.DataHora = DateTime.UtcNow;
-
-            await _repo.AddAsync(feedback);
-        }
-
         public async Task<List<GetFeedbackCaminhoDTO>> GetAllAsync()
         {
             var feedbacks = await _repo.GetAllAsync();
             return _mapper.Map<List<GetFeedbackCaminhoDTO>>(feedbacks);
         }
 
-        public async Task<GetFeedbackCaminhoDTO?> GetByIdAsync(long id)
+        public async Task<GetFeedbackCaminhoDTO> GetByIdAsync(long id)
         {
             var feedback = await _repo.GetByIdAsync(id);
             return feedback == null ? null : _mapper.Map<GetFeedbackCaminhoDTO>(feedback);
+        }
+
+        public async Task AddAsync(PostFeedbackCaminhoDTO dto)
+        {
+            var entity = _mapper.Map<FeedbackCaminho>(dto);
+            entity.Avaliacao = dto.Avaliacao == 0 ? 5 : dto.Avaliacao; // garante default 5
+            await _repo.AddAsync(entity);
         }
 
         public async Task DeleteAsync(long id)
@@ -43,5 +42,6 @@ namespace InDoorMappingAPI.Services
             await _repo.DeleteAsync(id);
         }
     }
+
 
 }

@@ -33,7 +33,7 @@ namespace InDoorMappingAPI.Repos
 
         public async Task<Log> GetByIdAsync(long id)
         {
-            return await _context.Logs.Include(l => l.Usuario).FirstOrDefaultAsync(l => l.LogId == id);
+            return await _context.Logs.Include(l => l.Usuario).FirstOrDefaultAsync(l => l.Id == id);
         }
 
         public async Task AddAsync(Log log)

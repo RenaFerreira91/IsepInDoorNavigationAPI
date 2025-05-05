@@ -6,6 +6,7 @@ using InDoorMappingAPI.Services.Interfaces;
 using InDoorMappingAPI.DTOs.GETs;
 using InDoorMappingAPI.DTOs.POSTs;
 using InDoorMappingAPI.DTOs.PUTs;
+using InDoorMappingAPI.Services;
 
 namespace InDoorMappingAPI.Controllers.Public
 {
@@ -42,6 +43,14 @@ namespace InDoorMappingAPI.Controllers.Public
             if (dto == null) return NotFound();
             return Ok(dto);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(PostInfraestruturaDTO dto)
+        {
+            await _service.AddAsync(dto);
+            return Ok("Infraestrutura criada com sucesso.");
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, PutInfraestruturaDTO dto)
         {

@@ -8,9 +8,8 @@ using InDoorMappingAPI.DTOs.GETs;
 
 namespace InDoorMappingAPI.Controllers.Public
 {
-    [AllowAnonymous]
     [ApiController]
-    [Route("api/public/[controller]")]
+    [Route("api/[controller]")]
     public class FeedbackCaminhosController : ControllerBase
     {
         private readonly IFeedbackCaminhoService _service;
@@ -21,7 +20,7 @@ namespace InDoorMappingAPI.Controllers.Public
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GetFeedbackCaminhoDTO>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GetFeedbackCaminhoDTO>>> GetAll()
         {
             var feedbacks = await _service.GetAllAsync();
             return Ok(feedbacks);
@@ -31,27 +30,23 @@ namespace InDoorMappingAPI.Controllers.Public
         public async Task<ActionResult<GetFeedbackCaminhoDTO>> GetById(long id)
         {
             var feedback = await _service.GetByIdAsync(id);
-            if (feedback == null)
-                return NotFound();
-
+            if (feedback == null) return NotFound("Feedback not found.");
             return Ok(feedback);
         }
 
         [HttpPost]
         public async Task<ActionResult> Create(PostFeedbackCaminhoDTO dto)
         {
-            if (dto.Avaliacao < 1 || dto.Avaliacao > 5)
-                return BadRequest("Avaliacao must be between 1 and 5.");
-
             await _service.AddAsync(dto);
-            return Ok();
+            return Ok("Feedback created successfully.");
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(long id)
         {
             await _service.DeleteAsync(id);
-            return NoContent();
+            return Ok("Feedback deleted successfully.");
         }
     }
+
 }
