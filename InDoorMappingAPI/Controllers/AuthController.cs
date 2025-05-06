@@ -173,5 +173,20 @@ namespace InDoorMappingAPI.Controllers
             return Ok("Password has been changed successfully.");
         }
 
+        [HttpPost("request-recovery-token")]
+        public async Task<IActionResult> RequestRecoveryToken(string email)
+        {
+            var user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+            if (user == null)
+                return NotFound("User with this email does not exist.");
+
+            var token = await _recService.GenerateRecoveryToken(user.UsuarioId);
+
+            await _emailService.SendRecoveryTokenEmail(user.Email, token);
+
+            // Aqui devolvemos também o token diretamente na resposta
+            return Ok(new { RecoveryToken = token });
+        }
+
     }
 }
