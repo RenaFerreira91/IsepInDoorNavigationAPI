@@ -153,5 +153,25 @@ namespace InDoorMappingAPI.Controllers
 
             return Ok("Token is valid.");
         }
+
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword([FromBody] PostChangePasswordDTO dto)
+        {
+            var user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == dto.Email);
+            if (user == null)
+                return NotFound("User not found.");
+
+            var hasher = new PasswordHasher<Usuario>();
+            var result = hasher.VerifyHashedPassword(user, user.PasswordHash, dto.OldPassword);
+
+            if (result == PasswordVerificationResult.Failed)
+                return BadRequest("Old password is incorrect.");
+
+            user.PasswordHash = hasher.HashPassword(user, dto.NewPassword);
+            await _context.SaveChangesAsync();
+
+            return Ok("Password has been changed successfully.");
+        }
+
     }
 }

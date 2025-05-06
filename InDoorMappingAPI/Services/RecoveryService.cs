@@ -38,5 +38,7 @@ namespace InDoorMappingAPI.Services
         {
             await _repo.DeleteAsync(recoveryToken);
         }
+
+        
     }
 }

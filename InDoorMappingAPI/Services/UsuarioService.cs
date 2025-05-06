@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using InDoorMappingAPI.DTOs.GETs;
+using InDoorMappingAPI.DTOs.POSTs;
 using InDoorMappingAPI.DTOs.PUTs;
 using InDoorMappingAPI.Models;
+using InDoorMappingAPI.Repos;
 using InDoorMappingAPI.Repos.Interfaces;
 using InDoorMappingAPI.Services.Interfaces;
 
@@ -51,6 +53,7 @@ namespace InDoorMappingAPI.Services
 
             await _repo.DeleteAsync(id);
         }
+       
 
     }
 }
