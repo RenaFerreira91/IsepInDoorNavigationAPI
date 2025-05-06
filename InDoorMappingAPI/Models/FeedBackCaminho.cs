@@ -8,22 +8,16 @@ namespace InDoorMappingAPI.Models
     public class FeedbackCaminho
     {
         [Key]
-        [Column("feedbackid")]
-        public int FeedbackId { get; set; }
+        [Column("id")]
+        public long Id { get; set; }
 
         [Required]
         [Column("usuarioid")]
         public long UsuarioId { get; set; }
 
-        [ForeignKey("UsuarioId")]
-        public Usuario Usuario { get; set; }
-
         [Required]
         [Column("caminhoid")]
         public long CaminhoId { get; set; }
-
-        [ForeignKey("CaminhoId")]
-        public Caminho Caminho { get; set; }
 
         [Required]
         [Column("avaliacao")]
