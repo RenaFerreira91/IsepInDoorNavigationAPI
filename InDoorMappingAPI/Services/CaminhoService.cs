@@ -33,16 +33,20 @@ namespace InDoorMappingAPI
             return _mapper.Map<List<GetCaminhoDTO>>(caminhos);
         }
 
-        public async Task<GetMelhorCaminhoDTO> ObterMelhorCaminhoAsync(long destinoId, List<long> infraestruturasBloqueadas)
+        public async Task<GetMelhorCaminhoDTO> ObterMelhorCaminhoAsync(long destinoId)
         {
             var caminhos = await _repo.GetAllAsync();
-
+            var infraestruturas = await _context.Infraestruturas
+                .Where(i => i.Acessivel)
+                .Select(i => i.Id)
+                .ToListAsync();
 
             var grafo = new Dictionary<long, List<(long destino, double distancia)>>();
 
             foreach (var c in caminhos)
             {
-                if (infraestruturasBloqueadas.Contains(c.OrigemId) || infraestruturasBloqueadas.Contains(c.DestinoId))
+                // ignora caminhos com origem ou destino em infraestruturas NÃO acessíveis
+                if (!c.Acessivel || !infraestruturas.Contains(c.OrigemId) || !infraestruturas.Contains(c.DestinoId))
                     continue;
 
                 if (!grafo.ContainsKey(c.OrigemId))
@@ -78,6 +82,7 @@ namespace InDoorMappingAPI
                 Mensagem = "Sem caminho acessível encontrado com as condições atuais."
             };
         }
+
 
         private List<long> BFSComPeso(Dictionary<long, List<(long destino, double distancia)>> grafo, long origem, long destino)
         {

@@ -19,11 +19,9 @@ public class CaminhosController : ControllerBase
 
 
     [HttpGet("melhor-caminho")]
-    public async Task<IActionResult> GetMelhorCaminho([FromQuery] long destinoId, [FromQuery] List<long> bloqueados = null)
+    public async Task<IActionResult> GetMelhorCaminho([FromQuery] long destinoId)
     {
-        bloqueados ??= new List<long>();
-
-        var resultado = await _service.ObterMelhorCaminhoAsync(destinoId, bloqueados);
+        var resultado = await _service.ObterMelhorCaminhoAsync(destinoId);
 
         if (resultado.InfraestruturasIds == null || !resultado.InfraestruturasIds.Any())
             return NotFound("Nenhum caminho acessível encontrado.");
