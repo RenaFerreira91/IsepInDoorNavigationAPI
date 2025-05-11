@@ -43,11 +43,14 @@ namespace InDoorMappingAPI.Services
         }
         public async Task UpdateAsync(PutFeedbackForUserDTO dto)
         {
-            var entity = await _repo.GetByIdAsync(dto.Id);
-            if (entity == null) throw new KeyNotFoundException("Feedback não encontrado.");
+            var feedback = await _repo.GetByIdAsync(dto.Id);
+            if (feedback == null)
+                throw new Exception("Feedback not found");
 
-            _mapper.Map(dto, entity);
-            await _repo.UpdateAsync(entity);
+            feedback.Comentario = dto.Comentario;
+            feedback.DataHora = DateTime.UtcNow;
+
+            await _repo.UpdateAsync(feedback);
         }
     }
 
