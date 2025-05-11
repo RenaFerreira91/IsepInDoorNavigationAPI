@@ -42,6 +42,7 @@ namespace InDoorMappingAPI
             builder.Services.AddScoped<IComandoEpocRepo, ComandoEpocRepo>();
             builder.Services.AddScoped<IDiarioRepo, DiarioRepo>();
             builder.Services.AddScoped<IFeedbackCaminhoRepo, FeedbackCaminhoRepo>();
+            builder.Services.AddScoped<IFeedbackForUserRepo, FeedbackForUserRepo>();
             builder.Services.AddScoped<IAcessibilidadeRepo, AcessibilidadeRepo>();
             builder.Services.AddScoped<IRecoveryTokenRepo, RecoveryTokenRepo>();
             builder.Services.AddScoped<ILocalizacaoUsuarioRepo, LocalizacaoUsuarioRepo>();
@@ -59,6 +60,7 @@ namespace InDoorMappingAPI
             builder.Services.AddScoped<IComandoEpocService, ComandoEpocService>();
             builder.Services.AddScoped<IDiarioService, DiarioService>();
             builder.Services.AddScoped<IFeedbackCaminhoService, FeedbackCaminhoService>();
+            builder.Services.AddScoped<IFeedbackForUserService, FeedbackForUserService>();
             builder.Services.AddScoped<IAcessibilidadeService, AcessibilidadeService>();
             builder.Services.AddScoped<IRecoveryService, RecoveryService>();
             builder.Services.AddScoped<ILocalizacaoUsuarioService, LocalizacaoUsuarioService>();

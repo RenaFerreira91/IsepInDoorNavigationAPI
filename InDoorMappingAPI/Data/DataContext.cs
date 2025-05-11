@@ -19,6 +19,7 @@ namespace InDoorMappingAPI.Data
         public DbSet<ComandoEpoc> ComandosEpoc { get; set; }
         public DbSet<Diario> Diario { get; set; }
         public DbSet<FeedbackCaminho> FeedbackCaminhos { get; set; }
+        public DbSet<FeedbackForUser> FeedbacksForUsers { get; set; }
         public DbSet<TipoUsuario> TiposUsuarios { get; set; } 
         public DbSet<RecoveryToken> RecoveryTokens { get; set; } 
         public DbSet<LocalizacaoUsuario> LocalizacoesUsuario { get; set; } 
