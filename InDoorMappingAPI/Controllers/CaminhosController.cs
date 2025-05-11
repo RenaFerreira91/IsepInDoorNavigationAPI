@@ -30,6 +30,13 @@ public class CaminhosController : ControllerBase
 
         return Ok(resultado);
     }
+
+    [HttpGet("todos-detalhados")]
+    public async Task<IActionResult> GetTodosDetalhados([FromQuery] long origemId, [FromQuery] long destinoId)
+    {
+        var resultado = await _service.GetAllPossiblePathsAsync(origemId, destinoId);
+        return Ok(resultado);
+    }
     // CRUD
 
     [HttpGet]

@@ -11,6 +11,8 @@ public interface ICaminhoService
     // Calcula o melhor caminho acessível entre as entradas do ISEP e o destino especificado, 
     // evitando infraestruturas bloqueadas (ex: rampas).
     Task<GetMelhorCaminhoDTO> ObterMelhorCaminhoAsync(long destinoId, List<long> infraestruturasBloqueadas);
+
+    Task<GetCaminhosDetalhadoDTO> GetAllPossiblePathsAsync(long origemId, long destinoId);
     //CRUD
     Task<List<GetCaminhoDTO>> GetAllAsync();
     Task<GetCaminhoDTO> GetByIdAsync(long id);

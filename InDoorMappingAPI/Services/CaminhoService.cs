@@ -149,6 +149,116 @@ namespace InDoorMappingAPI
             var caminhos = await _repo.GetAllWithDetailsAsync();
             return _mapper.Map<List<GetCaminhoDetalhadoDTO>>(caminhos);
         }
+        public async Task<GetCaminhosDetalhadoDTO> GetAllPossiblePathsAsync(long origemId, long destinoId)
+        {
+            var caminhosDb = await _repo.GetAllWithDetailsAsync();
+            caminhosDb = caminhosDb.Where(c => c.Acessivel).ToList();
+            var caminhosDetalhados = _mapper.Map<List<GetCaminhoDetalhadoDTO>>(caminhosDb);
+
+            // monta grafo como dicionário: origemId -> lista de caminhos (detalhados)
+            var grafo = new Dictionary<long, List<GetCaminhoDetalhadoDTO>>();
+
+            foreach (var c in caminhosDetalhados)
+            {
+                var forward = new GetCaminhoDetalhadoDTO
+                {
+                    Id = c.Id,
+                    OrigemId = c.OrigemId,
+                    OrigemDescricao = c.OrigemDescricao,
+                    OrigemPiso = c.OrigemPiso,
+                    OrigemTipoInfraestrutura = c.OrigemTipoInfraestrutura,
+                    DestinoId = c.DestinoId,
+                    DestinoDescricao = c.DestinoDescricao,
+                    DestinoPiso = c.DestinoPiso,
+                    DestinoTipoInfraestrutura = c.DestinoTipoInfraestrutura,
+                    Distancia = c.Distancia,
+                    Acessivel = c.Acessivel,
+                    TipoAcessibilidade = c.TipoAcessibilidade
+                };
+
+                var backward = new GetCaminhoDetalhadoDTO
+                {
+                    Id = c.Id,
+                    OrigemId = c.DestinoId,
+                    OrigemDescricao = c.DestinoDescricao,
+                    OrigemPiso = c.DestinoPiso,
+                    OrigemTipoInfraestrutura = c.DestinoTipoInfraestrutura,
+                    DestinoId = c.OrigemId,
+                    DestinoDescricao = c.OrigemDescricao,
+                    DestinoPiso = c.OrigemPiso,
+                    DestinoTipoInfraestrutura = c.OrigemTipoInfraestrutura,
+                    Distancia = c.Distancia,
+                    Acessivel = c.Acessivel,
+                    TipoAcessibilidade = c.TipoAcessibilidade
+                };
+
+                if (!grafo.ContainsKey(c.OrigemId))
+                    grafo[c.OrigemId] = new();
+                if (!grafo.ContainsKey(c.DestinoId))
+                    grafo[c.DestinoId] = new();
+
+                grafo[c.OrigemId].Add(forward);
+                grafo[c.DestinoId].Add(backward);
+            }
+
+            var caminhos = new List<List<GetCaminhoDetalhadoDTO>>();
+            var fila = new Queue<(long atual, List<GetCaminhoDetalhadoDTO> percurso)>();
+            fila.Enqueue((origemId, new List<GetCaminhoDetalhadoDTO>()));
+
+            int maxCaminhos = 10000; // máximo de caminhos a devolver
+            int maxProfundidade = 15; // limite de passos por caminho
+
+            while (fila.Count > 0)
+            {
+                var (atual, percurso) = fila.Dequeue();
+
+                if (atual == destinoId)
+                {
+                    caminhos.Add(percurso);
+
+                    if (caminhos.Count >= maxCaminhos)
+                        break;
+
+                    continue;
+                }
+
+                if (!grafo.ContainsKey(atual)) continue;
+
+                foreach (var segmento in grafo[atual])
+                {
+                    // Evita ciclos: não volta a nós já percorridos
+                    var nosVisitados = percurso
+                        .Select(p => p.OrigemId)
+                        .Append(percurso.LastOrDefault()?.DestinoId ?? atual)
+                        .ToHashSet();
+
+                    if (nosVisitados.Contains(segmento.DestinoId))
+                        continue;
+
+                    // Limita profundidade
+                    if (percurso.Count >= maxProfundidade)
+                        continue;
+
+                    var novoPercurso = new List<GetCaminhoDetalhadoDTO>(percurso) { segmento };
+                    fila.Enqueue((segmento.DestinoId, novoPercurso));
+                }
+            }
+            var caminhosUnicos = caminhos
+                .GroupBy(percurso =>
+                    string.Join("->", percurso.Select(p => $"{p.OrigemId}-{p.DestinoId}"))
+                )
+                .Select(g => g.First())
+                .ToList();
+            return new GetCaminhosDetalhadoDTO
+            {
+                OrigemId = origemId,
+                DestinoId = destinoId,
+                Caminhos = caminhosUnicos
+            };
+        }
+
+
+        
     }
 
 }
