@@ -152,7 +152,10 @@ namespace InDoorMappingAPI
         public async Task<GetCaminhosDetalhadoDTO> GetAllPossiblePathsAsync(long origemId, long destinoId)
         {
             var caminhosDb = await _repo.GetAllWithDetailsAsync();
-            caminhosDb = caminhosDb.Where(c => c.Acessivel).ToList();
+      
+            caminhosDb = caminhosDb.Where(c =>
+        c.Acessivel && c.Origem.Acessivel == true && c.Destino.Acessivel == true)
+    .ToList();
             var caminhosDetalhados = _mapper.Map<List<GetCaminhoDetalhadoDTO>>(caminhosDb);
 
             // monta grafo como dicionário: origemId -> lista de caminhos (detalhados)
@@ -257,8 +260,11 @@ namespace InDoorMappingAPI
             };
         }
 
+        private bool IsInfraestruturaAcessivel(long id, List<GetInfraestruturaDTO> infraestruturas)
+        {
+            return infraestruturas.FirstOrDefault(i => i.Id == id)?.Acessivel == true;
+        }
 
-        
     }
 
 }
