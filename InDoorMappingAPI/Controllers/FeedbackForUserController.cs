@@ -1,4 +1,5 @@
 ﻿using InDoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.DTOs.PUTs;
 using InDoorMappingAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,6 +42,15 @@ namespace InDoorMappingAPI.Controllers
         {
             await _service.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(long id, [FromBody] PutFeedbackForUserDTO dto)
+        {
+            if (id != dto.Id) return BadRequest("ID mismatch.");
+
+            await _service.UpdateAsync(dto);
+            return Ok("Feedback atualizado com sucesso.");
         }
     }
 

@@ -64,6 +64,8 @@ namespace InDoorMappingAPI
 
             CreateMap<FeedbackForUser, GetFeedbackForUserDTO>();
             CreateMap<PostFeedbackForUserDTO, FeedbackForUser>();
+            CreateMap<PutFeedbackForUserDTO, FeedbackForUser>();
+
         }
     }
 }

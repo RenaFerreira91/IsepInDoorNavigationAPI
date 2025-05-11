@@ -8,5 +8,6 @@ namespace InDoorMappingAPI.Repos.Interfaces
         Task DeleteAsync(long id);
         Task<IEnumerable<FeedbackForUser>> GetAllAsync();
         Task<FeedbackForUser?> GetByIdAsync(long id);
+        Task UpdateAsync(FeedbackForUser feedback);
     }
 }

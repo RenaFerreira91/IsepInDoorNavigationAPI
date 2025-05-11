@@ -234,9 +234,13 @@ C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\
 C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.IndoorMappingAPI.props
 C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\scopedcss\bundle\IndoorMappingAPI.styles.css
-C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\IndoorMappingAPI.csproj.CopyComplete
 C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\IndoorMappingAPI.dll
 C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\refint\IndoorMappingAPI.dll
 C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\IndoorMappingAPI.pdb
 C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\IndoorMappingAPI.genruntimeconfig.cache
 C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\ref\IndoorMappingAPI.dll
+C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\bin\Debug\net8.0\InDoorMappingAPI.staticwebassets.endpoints.json
+C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\staticwebassets\msbuild.InDoorMappingAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\Renfe\Desktop\TASSI\IsepInDoorNavigationAPI\InDoorMappingAPI\obj\Debug\net8.0\InDoorMa.FC863C69.Up2Date

@@ -2964,9 +2964,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Renfe\\Desktop\\TASSI\\IsepInDoorNavigationAPI\\InDoorMappingAPI\\IndoorMappingAPI.csproj",
-      "projectName": "IndoorMappingAPI",
-      "projectPath": "C:\\Users\\Renfe\\Desktop\\TASSI\\IsepInDoorNavigationAPI\\InDoorMappingAPI\\IndoorMappingAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Renfe\\Desktop\\TASSI\\IsepInDoorNavigationAPI\\InDoorMappingAPI\\InDoorMappingAPI.csproj",
+      "projectName": "InDoorMappingAPI",
+      "projectPath": "C:\\Users\\Renfe\\Desktop\\TASSI\\IsepInDoorNavigationAPI\\InDoorMappingAPI\\InDoorMappingAPI.csproj",
       "packagesPath": "C:\\Users\\Renfe\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Renfe\\Desktop\\TASSI\\IsepInDoorNavigationAPI\\InDoorMappingAPI\\obj\\",
       "projectStyle": "PackageReference",
@@ -2996,7 +2996,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -3048,7 +3054,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

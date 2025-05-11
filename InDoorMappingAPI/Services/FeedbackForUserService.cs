@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using InDoorMappingAPI.DTOs.GETs;
 using InDoorMappingAPI.DTOs.POSTs;
+using InDoorMappingAPI.DTOs.PUTs;
 using InDoorMappingAPI.Models;
 using InDoorMappingAPI.Repos.Interfaces;
 using InDoorMappingAPI.Services.Interfaces;
@@ -39,6 +40,14 @@ namespace InDoorMappingAPI.Services
         public async Task DeleteAsync(long id)
         {
             await _repo.DeleteAsync(id);
+        }
+        public async Task UpdateAsync(PutFeedbackForUserDTO dto)
+        {
+            var entity = await _repo.GetByIdAsync(dto.Id);
+            if (entity == null) throw new KeyNotFoundException("Feedback não encontrado.");
+
+            _mapper.Map(dto, entity);
+            await _repo.UpdateAsync(entity);
         }
     }
 

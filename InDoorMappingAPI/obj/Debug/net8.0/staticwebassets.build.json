@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "x+0Eic3vNlMKW+wMYPSZUF9l9/lDA2HLpCFcWUxG5Yg=",
+  "Hash": "0Whidfv5BNFroS1IqixOajbtC0l9n3gtXQ6BZffltrk=",
   "Source": "InDoorMappingAPI",
   "BasePath": "_content/InDoorMappingAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

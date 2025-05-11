@@ -39,6 +39,11 @@ namespace InDoorMappingAPI.Repos
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task UpdateAsync(FeedbackForUser feedback)
+        {
+            _context.FeedbacksForUsers.Update(feedback);
+            await _context.SaveChangesAsync();
+        }
     }
 }
 
